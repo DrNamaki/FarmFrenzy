@@ -12,6 +12,10 @@ public class Labratory {
         return this.Level;
     }
 
+    public void setActive(boolean active) {
+        Active = active;
+    }
+
     public int getX_Positin() {
         return X_Positin;
     }
