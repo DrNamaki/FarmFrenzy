@@ -16,6 +16,10 @@ public class Labratory {
         Active = active;
     }
 
+    public boolean isActive() {
+        return Active;
+    }
+
     public int getX_Positin() {
         return X_Positin;
     }

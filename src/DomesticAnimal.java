@@ -1,4 +1,7 @@
 public class DomesticAnimal extends Animal{
+
+
+
     void Eating(){};
     void NeedWater(){};
     void FindGrass(){};

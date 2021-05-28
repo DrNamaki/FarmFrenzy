@@ -1,4 +1,5 @@
 public class Animal {
+    static final int time = 10 ;
     String nameOfAnimal ;
     int X_position;
     int Y_position;
@@ -8,7 +9,6 @@ public class Animal {
     boolean isLive;
     int SizaInWareHouse;
     int CurrentTime;
-    int time;
     int Producttime;
     int Productcurrenttime;
 
@@ -54,14 +54,6 @@ public class Animal {
 
     public void setCurrentTime(int currentTime) {
         CurrentTime = currentTime;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
     }
 
     public int getProducttime() {
