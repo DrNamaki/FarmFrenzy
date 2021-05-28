@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+   
 public class Manger {
      public ArrayList<DomesticAnimal> Domestic=new ArrayList<>();
      public ArrayList<WildAnimal> Wild=new ArrayList<>();
