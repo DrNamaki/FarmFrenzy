@@ -1,4 +1,5 @@
 public class Animal {
+    String nameOfAnimal ;
     int X_position;
     int Y_position;
     void RandomWalk(){};
@@ -10,6 +11,10 @@ public class Animal {
     int time;
     int Producttime;
     int Productcurrenttime;
+
+    public String getNameOfAnimal() {
+        return nameOfAnimal;
+    }
 
     public int getX_position() {
         return X_position;
