@@ -37,6 +37,7 @@ public class Manger {
 
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
+            ProductProcessing();
 
             //checking cage
             //TODO
