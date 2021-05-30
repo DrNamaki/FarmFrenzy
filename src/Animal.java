@@ -3,6 +3,8 @@ public class Animal {
     String nameOfAnimal ;
     int X_position;
     int Y_position;
+    int PX_position;
+    int PY_position;
     void RandomWalk(){};
     void Voice(){};
     void WorkToDo(){};
@@ -11,6 +13,30 @@ public class Animal {
     int CurrentTime;
     int Producttime;
     int Productcurrenttime;
+
+    public static int getTime() {
+        return time;
+    }
+
+    public void setNameOfAnimal(String nameOfAnimal) {
+        this.nameOfAnimal = nameOfAnimal;
+    }
+
+    public int getPX_position() {
+        return PX_position;
+    }
+
+    public void setPX_position(int PX_position) {
+        this.PX_position = PX_position;
+    }
+
+    public int getPY_position() {
+        return PY_position;
+    }
+
+    public void setPY_position(int PY_position) {
+        this.PY_position = PY_position;
+    }
 
     public String getNameOfAnimal() {
         return nameOfAnimal;

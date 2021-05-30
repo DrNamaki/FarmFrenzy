@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class WareHouse {
     int Level;
-  static final int Capacity = 200;
+  static final int Capacity = 30;
     int AllCapacity;
     int AvailabeCapacity;
     ArrayList<Product> Product=new ArrayList<>();

@@ -5,6 +5,23 @@ public class Product {
     int Y_position;
     boolean Harvested;
     void ToLive(){};
+    int SizeinWarehouse;
+
+    public String getNameOfProduct() {
+        return nameOfProduct;
+    }
+
+    public void setNameOfProduct(String nameOfProduct) {
+        this.nameOfProduct = nameOfProduct;
+    }
+
+    public int getSizeinWarehouse() {
+        return SizeinWarehouse;
+    }
+
+    public void setSizeinWarehouse(int sizeinWarehouse) {
+        SizeinWarehouse = sizeinWarehouse;
+    }
 
     public void setCurrentTime(int currentTime) {
         CurrentTime = currentTime;

@@ -11,15 +11,19 @@ public class Manger {
     Bank bank = new Bank();
     public ArrayList<Labratory> labratories = new ArrayList<>();
     public ArrayList<Product> products = new ArrayList<>();
-    public ArrayList<Grass> grasses = new ArrayList<>();
-
+  WareHouse wareHouse=new WareHouse();
+int Grass[][]=new int[6][6];
+public ArrayList<HameKare> currentcage=new ArrayList<>();
+void fillthegrass(){
+    for(int i=0;i<6;i++){
+        for(int j=0;j<6;j++){
+            Grass[i][j]=0;
+        }
+    }
+}
     public void BuyAnimal(String name) {
 
     }
-
-    //
-    //
-    //
     public void ProductProcessing() {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).isActive()) {
@@ -32,7 +36,6 @@ public class Manger {
             }
         }
     }
-
     public void RemoveDeadAnimals() {
         for (int i = 0; i < domestics.size(); i++) {
             domestics.get(i).setCurrentTime(domestics.get(i).getCurrentTime() - 1);
@@ -41,7 +44,6 @@ public class Manger {
         }
 
     }
-
     public void RemoveCorruptProducts() {
         for (int i = 0; i < products.size(); i++) {
             products.get(i).setCurrentTime(products.get(i).getCurrentTime() - 1);
@@ -49,7 +51,6 @@ public class Manger {
                 products.remove(i);
         }
     }
-
     public void ProducingProduct() {
         for (int i = 0; i < allDomestics.size(); i++) {
             allDomestics.get(i).setProductcurrenttime(allDomestics.get(i).getProductcurrenttime() - 1);
@@ -75,22 +76,169 @@ public class Manger {
 
 
     }
-
-
     public void Eating() {
         for (int i = 0; i < allDomestics.size(); i++) {
             if (allDomestics.get(i).isLive && allDomestics.get(i).getCurrentTime() <= 5) {
-                for (Grass grass : grasses) {
-                    if (grass.getX_position() == allDomestics.get(i).getX_position() &&
-                            grass.getY_position() == allDomestics.get(i).getY_position()) {
-                        allDomestics.get(i).setCurrentTime(DomesticAnimal.time);
-                        grasses.remove(i);
+                for(int j=0;j<6;j++){
+                    for(int k=0;k<6;k++){
+                        if (j == allDomestics.get(i).getX_position() &&
+                                k == allDomestics.get(i).getY_position()) {
+                            allDomestics.get(i).setCurrentTime(DomesticAnimal.time);
+                           Grass[j][k]--;
+                        }
                     }
                 }
             }
         }
     }
-
+public boolean Addtowarehouse(Product product){
+    if(wareHouse.AvailabeCapacity>=product.SizeinWarehouse){
+        wareHouse.Product.add(product);
+        return true;
+    }
+    return false;
+}
+public boolean Addtowarehouse(Animal animal){
+ if(wareHouse.AvailabeCapacity>=animal.SizaInWareHouse){
+     wareHouse.Animal.add(animal);
+     return true;
+ }
+    return false;
+}
+public void Cage(int x,int y){
+    int a=0;
+    for(int i=0;i<cages.size();i++){
+        if(cages.get(i).getX()==x&&cages.get(i).getY()==y){
+            a=1;
+        }
+    }
+    if(a==0){
+        for(int j=0;j<allWilds.size();j++){
+            if(allWilds.get(j).getX_position()==x&&allWilds.get(j).getY_position()==y){
+                Cage cage=new Cage(x,y,allWilds.get(j));
+                cages.add(cage);
+            }
+        }
+    }
+}
+public void Cage(){
+   for(int i=0;i<cages.size();i++){
+       if(cages.get(i).getCurrrenttime()!=0){
+           int a=0;
+           for(int j=0;j<currentcage.size();j++){
+               if(cages.get(i).getX()==currentcage.get(j).getX()&&cages.get(i).getY()==currentcage.get(j).getY()){
+                   cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime()-1);
+                   a=1;
+               }
+           }
+           if(a==0){
+               cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime()+1);
+           }
+       }
+       else{
+         if(cages.get(i).getCurrentcagetime()!=0){
+             boolean s=Addtowarehouse(cages.get(i).getWildanimal());
+             if(s){
+                 //TODO
+                 //remove the cage and the wildanimal from theirlist
+             }
+             if(!s){
+                 cages.get(i).setCurrentcagetime(cages.get(i).getCurrentcagetime()-1);
+             }
+         }
+         else{
+             //TODO
+             //remove the cage and let the wild animal go
+         }
+       }
+   }
+}
+public void Walk(){
+    //TODO
+    // tamame adad dakhel ro bayad ghadr begiram
+    for(int i=0;i<allWilds.size();i++){
+        if(allWilds.get(i).getCurrentTime()>0&&allWilds.get(i).getX_position()<6){
+            if(allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")){
+                allWilds.get(i).setPX_position(allWilds.get(i).getX_position()+1);
+                allWilds.get(i).setX_position(allWilds.get(i).getX_position()+2);
+            }
+            else{
+                allWilds.get(i).setPX_position(allWilds.get(i).getX_position());
+                allWilds.get(i).setX_position(allWilds.get(i).getX_position()+1);
+            }
+        }
+        else{
+            //TODO
+            //remove the dead allwildanimals
+        }
+    }
+    for(int i=0;i<allDefenders.size();i++){
+      if(allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("cat")){
+          int r=0,x=0,y=0;
+          for(int j=0;j<products.size();j++){
+              if(products.get(j).getNameOfProduct().equalsIgnoreCase("egg")||products.get(j).getNameOfProduct().equalsIgnoreCase("milk")||products.get(j).getNameOfProduct().equalsIgnoreCase("feather")){
+                  if(r<=(products.get(j).getX_position()+products.get(j).getY_position()-allDefenders.get(i).getX_position()-allDefenders.get(i).getX_position())){
+                      r=(products.get(j).getX_position()+products.get(j).getY_position()-allDefenders.get(i).getX_position()-allDefenders.get(i).getX_position());
+                      x=products.get(j).getX_position();
+                      y=products.get(j).getY_position();
+                  }
+              }
+          }
+          if(x==allDefenders.get(i).getX_position()){
+              if(y>=allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()+1);
+              else allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()-1);
+          }
+         else if(y==allDefenders.get(i).getY_position()){
+              if(x>=allDefenders.get(i).getX_position()) allDefenders.get(i).setX_position(allDefenders.get(i).getX_position()+1);
+              else allDefenders.get(i).setX_position(allDefenders.get(i).getX_position()-1);
+          }
+         else if (y>=allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()+1);
+         else if (y<allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()-1);
+      }
+      if(allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("dog")){
+          int r=0,x=0,y=0;
+          for(int j=0;j<allWilds.size();j++){
+                  if(r<=(allWilds.get(j).getX_position()+allWilds.get(j).getY_position()-allDefenders.get(i).getX_position()-allDefenders.get(i).getX_position())){
+                      r=(allWilds.get(j).getX_position()+allWilds.get(j).getY_position()-allDefenders.get(i).getX_position()-allDefenders.get(i).getX_position());
+                      x=allWilds.get(j).getX_position();
+                      y=allWilds.get(j).getY_position();
+                  }
+          }
+          if(x==allDefenders.get(i).getX_position()){
+              if(y>=allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()+1);
+              else allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()-1);
+          }
+          else if(y==allDefenders.get(i).getY_position()){
+              if(x>=allDefenders.get(i).getX_position()) allDefenders.get(i).setX_position(allDefenders.get(i).getX_position()+1);
+              else allDefenders.get(i).setX_position(allDefenders.get(i).getX_position()-1);
+          }
+          else if (y>=allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()+1);
+          else if (y<allDefenders.get(i).getY_position()) allDefenders.get(i).setY_position(allDefenders.get(i).getY_position()-1);
+      }
+    }
+    for(int i=0;i<allDomestics.size();i++){
+        int r=0,x=0,y=0;
+        for(int j=0;j<6;j++) {
+            for (int k = 0; k < 6; k++){
+                if (r <= (k+j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position())) {
+                    r = (k+j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position());
+                    x =k;
+                    y =k;
+                }
+        }
+        }
+        if(x==allDomestics.get(i).getX_position()){
+            if(y>=allDomestics.get(i).getY_position()) allDomestics.get(i).setY_position(allDomestics.get(i).getY_position()+1);
+            else allDomestics.get(i).setY_position(allDomestics.get(i).getY_position()-1);
+        }
+        else if(y==allDomestics.get(i).getY_position()){
+            if(x>=allDomestics.get(i).getX_position()) allDomestics.get(i).setX_position(allDomestics.get(i).getX_position()+1);
+            else allDomestics.get(i).setX_position(allDomestics.get(i).getX_position()-1);
+        }
+        else if (y>=allDomestics.get(i).getY_position()) allDomestics.get(i).setY_position(allDomestics.get(i).getY_position()+1);
+        else if (y<allDomestics.get(i).getY_position()) allDomestics.get(i).setY_position(allDomestics.get(i).getY_position()-1);
+    }
+}
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
             {
