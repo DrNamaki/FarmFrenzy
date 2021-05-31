@@ -3,6 +3,8 @@ public class Product {
     int CurrentTime;
     int X_position;
     int Y_position;
+    int PX_position;
+    int PY_position;
     boolean Harvested;
     void ToLive(){};
     int SizeinWarehouse;
@@ -59,7 +61,25 @@ public class Product {
         CurrentTime = currentTime;
         X_position = x_position;
         Y_position = y_position;
+        PX_position = x_position;
+        PY_position = y_position;
         Harvested = harvested;
+    }
+
+    public int getPX_position() {
+        return PX_position;
+    }
+
+    public void setPX_position(int PX_position) {
+        this.PX_position = PX_position;
+    }
+
+    public int getPY_position() {
+        return PY_position;
+    }
+
+    public void setPY_position(int PY_position) {
+        this.PY_position = PY_position;
     }
 }
 //در این کلاس تمامی محصولاتاعم از پودر ها کیک ها کلوچه ها و
