@@ -2,16 +2,23 @@ import java.util.ArrayList;
 
 public class WareHouse {
     int Level;
-  static final int Capacity = 30;
+    static final int Capacity = 30;
     int AllCapacity;
-    int AvailabeCapacity;
-    ArrayList<Product> Product=new ArrayList<>();
-    ArrayList<Animal> Animal=new ArrayList<>();
-    ArrayList<Product> RecentlySold=new ArrayList<>();
-    boolean CanSellOrStore(){
+    int AvailableCapacity;
+    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Animal> animals = new ArrayList<>();
+    ArrayList<Product> RecentlySold = new ArrayList<>();
+
+    public int getAllCapacity() {
+        return AllCapacity;
+    }
+    boolean CanSellOrStore() {
         return true;
     }
-    void Sell(){};
+
+    void Sell() {
+    }
+
 }
 //این کلاس کلاس انبار ما می باشد و شامل یک سری خصوصیات هست
 //خصوصیاتی شامل ظرفیت انبار که از ان بیشتر نمی توان در ان گنجاند

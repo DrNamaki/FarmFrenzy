@@ -7,7 +7,16 @@ public class Product {
     int PY_position;
     boolean Harvested;
     void ToLive(){};
-    int SizeinWarehouse;
+    int SizeInWarehouse;
+
+    public Product(int currentTime,int x_position, int y_position, boolean harvested) {
+        CurrentTime = currentTime;
+        X_position = x_position;
+        Y_position = y_position;
+        PX_position = x_position;
+        PY_position = y_position;
+        Harvested = harvested;
+    }
 
     public String getNameOfProduct() {
         return nameOfProduct;
@@ -17,12 +26,12 @@ public class Product {
         this.nameOfProduct = nameOfProduct;
     }
 
-    public int getSizeinWarehouse() {
-        return SizeinWarehouse;
+    public int getSizeInWarehouse() {
+        return SizeInWarehouse;
     }
 
-    public void setSizeinWarehouse(int sizeinWarehouse) {
-        SizeinWarehouse = sizeinWarehouse;
+    public void setSizeInWarehouse(int sizeInWarehouse) {
+        SizeInWarehouse = sizeInWarehouse;
     }
 
     public void setCurrentTime(int currentTime) {
@@ -55,15 +64,6 @@ public class Product {
 
     public int getY_position() {
         return Y_position;
-    }
-
-    public Product(int currentTime, int x_position, int y_position, boolean harvested) {
-        CurrentTime = currentTime;
-        X_position = x_position;
-        Y_position = y_position;
-        PX_position = x_position;
-        PY_position = y_position;
-        Harvested = harvested;
     }
 
     public int getPX_position() {

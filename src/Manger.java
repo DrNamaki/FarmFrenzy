@@ -13,9 +13,9 @@ public class Manger {
     public ArrayList<Product> products = new ArrayList<>();
     WareHouse wareHouse = new WareHouse();
     int Grass[][] = new int[6][6];
-    public ArrayList<HameKare> currentcage = new ArrayList<>();
+    public ArrayList<HameKare> CurrentCages = new ArrayList<>();
 
-    void fillthegrass() {
+    void FillTheGrass() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 Grass[i][j] = 0;
@@ -34,10 +34,88 @@ public class Manger {
             }
             if (labratories.get(i).getCurrentTime() == 0) {
                 labratories.get(i).setActive(false);
-                //time ra be haman halat avvalie bargardan
-                //TODO
-            }
+                String primaryProduct = "";
+                if (labratories.get(i) instanceof FlourFactory)
+                    primaryProduct = "Egg";
+                else if (labratories.get(i) instanceof WeavingFactory)
+                    primaryProduct = "Feather";
+                else if (labratories.get(i) instanceof MilkPackagingFactory)
+                    primaryProduct = "Milk";
+                else if (labratories.get(i) instanceof Bakery)
+                    primaryProduct = "Flour";
+                else if (labratories.get(i) instanceof Tailoring)
+                    primaryProduct = "Cloth";
+                else if (labratories.get(i) instanceof IceCreamShop)
+                    primaryProduct = "PackagedMilk";
+
+                boolean IsFoundPrimaryProduct = false;
+                for (int j = 0; j < products.size(); j++) {
+                    if (primaryProduct.equals("Egg")) {
+                        if (products.get(i) instanceof Egg) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    } else if (primaryProduct.equals("Feather")) {
+                        if (products.get(i) instanceof Feather) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    } else if (primaryProduct.equals("Milk")) {
+                        if (products.get(i) instanceof Milk) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    } else if (primaryProduct.equals("Flour")) {
+                        if (products.get(i) instanceof Flour) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    } else if (primaryProduct.equals("Cloth")) {
+                        if (products.get(i) instanceof Cloth) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    } else if (primaryProduct.equals("PackagedMilk")) {
+                        if (products.get(i) instanceof PackagedMilk) {
+                            products.remove(i);
+                            IsFoundPrimaryProduct = true;
+                            break;
+                        }
+                    }
+                }
+                if (!IsFoundPrimaryProduct) {
+                    System.out.println("We have no " + primaryProduct + " in ware house to provide flour");
+                } else if (wareHouse.getAllCapacity() <= 30) {
+                    if (primaryProduct.equals("Egg")) {
+                        products.add(new Flour(Flour.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+                    } else if (primaryProduct.equals("Feather")) {
+                        products.add(new Cloth(Cloth.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+                    } else if (primaryProduct.equals("Milk")) {
+                        products.add(new PackagedMilk(PackagedMilk.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+                    } else if (primaryProduct.equals("Flour")) {
+                        products.add(new Bread(Bread.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+                    } else if (primaryProduct.equals("Cloth")) {
+                        products.add(new Shirt(Shirt.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+
+                    } else if (primaryProduct.equals("PackagedMilk")) {
+                        products.add(new IceCream(IceCream.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                                labratories.get(i).getY_Position(), false));
+
+                    }
+                }
+            } else System.out.println("We have not enough storage in ware house");
         }
+
     }
 
     public void RemoveDeadAnimals() {
@@ -99,17 +177,17 @@ public class Manger {
         }
     }
 
-    public boolean Addtowarehouse(Product product) {
-        if (wareHouse.AvailabeCapacity >= product.SizeinWarehouse) {
-            wareHouse.Product.add(product);
+    public boolean AddToWareHouse(Product product) {
+        if (wareHouse.AvailableCapacity >= product.SizeInWarehouse) {
+            wareHouse.products.add(product);
             return true;
         }
         return false;
     }
 
-    public boolean Addtowarehouse(Animal animal) {
-        if (wareHouse.AvailabeCapacity >= animal.SizaInWareHouse) {
-            wareHouse.Animal.add(animal);
+    public boolean AddToWareHouse(Animal animal) {
+        if (wareHouse.AvailableCapacity >= animal.SizaInWareHouse) {
+            wareHouse.animals.add(animal);
             return true;
         }
         return false;
@@ -136,8 +214,8 @@ public class Manger {
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getCurrrenttime() != 0) {
                 int a = 0;
-                for (int j = 0; j < currentcage.size(); j++) {
-                    if (cages.get(i).getX() == currentcage.get(j).getX() && cages.get(i).getY() == currentcage.get(j).getY()) {
+                for (int j = 0; j < CurrentCages.size(); j++) {
+                    if (cages.get(i).getX() == CurrentCages.get(j).getX() && cages.get(i).getY() == CurrentCages.get(j).getY()) {
                         cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime() - 1);
                         a = 1;
                     }
@@ -147,7 +225,7 @@ public class Manger {
                 }
             } else {
                 if (cages.get(i).getCurrentcagetime() != 0) {
-                    boolean s = Addtowarehouse(cages.get(i).getWildanimal());
+                    boolean s = AddToWareHouse(cages.get(i).getWildanimal());
                     if (s) {
                         //TODO
                         //remove the cage and the wildanimal from theirlist
@@ -268,7 +346,7 @@ public class Manger {
                 for (int j = 0; j < products.size(); j++) {
                     if (products.get(i).getNameOfProduct().equalsIgnoreCase("feather") || products.get(i).getNameOfProduct().equalsIgnoreCase("milk") || products.get(i).getNameOfProduct().equalsIgnoreCase("egg")) {
                         if (allDefenders.get(i).getX_position() == products.get(j).getX_position() && allDefenders.get(i).getY_position() == products.get(j).getY_position()) {
-                            boolean s = Addtowarehouse(products.get(j));
+                            boolean s = AddToWareHouse(products.get(j));
                             if (s) {
                                 //TODO
                                 //remove product from the list
@@ -287,8 +365,7 @@ public class Manger {
                             //TODO
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
-                        }
-                        else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
+                        } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                             if (allWilds.get(i).getPX_position() <= allDefenders.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDefenders.get(i).getX_position() && allWilds.get(i).getX_position() >= allDefenders.get(i).getPX_position()) {
                                 //TODO
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
@@ -301,7 +378,7 @@ public class Manger {
                                 sagzapas.add(allDefenders.get(i));
                             }
 
-                            } else if (allWilds.get(i).getY_position() > allWilds.get(i).getPY_position()) {
+                        } else if (allWilds.get(i).getY_position() > allWilds.get(i).getPY_position()) {
                             if (allWilds.get(i).getPY_position() <= allDefenders.get(i).getY_position() && allWilds.get(i).getPY_position() <= allDefenders.get(i).getPY_position() && allWilds.get(i).getY_position() >= allDefenders.get(i).getY_position() && allWilds.get(i).getY_position() >= allDefenders.get(i).getPY_position()) {
                                 //TODO
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
@@ -330,15 +407,14 @@ public class Manger {
         }
         //TODO
         //deleting the list of sagzapas from alldefenders
-        for(int i=0;i<allDomestics.size();i++){
+        for (int i = 0; i < allDomestics.size(); i++) {
             for (int j = 0; j < allWilds.size(); j++) {
                 if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (allDomestics.get(i).getX_position() == allWilds.get(j).getX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getY_position()) {
                         //TODO
                         //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                         sagzapas.add(allDefenders.get(i));
-                    }
-                    else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
+                    } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getPX_position() <= allDomestics.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDomestics.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getPX_position()) {
                             //TODO
                             //remove the domestic
@@ -372,15 +448,14 @@ public class Manger {
                 }
             }
         }
-        for(int i=0;i<products.size();i++){
+        for (int i = 0; i < products.size(); i++) {
             for (int j = 0; j < allWilds.size(); j++) {
                 if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (products.get(i).getX_position() == allWilds.get(j).getX_position() && products.get(i).getY_position() == allWilds.get(j).getY_position()) {
                         //TODO
                         //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                         sagzapas.add(allDefenders.get(i));
-                    }
-                    else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
+                    } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getPX_position() <= products.get(i).getX_position() && allWilds.get(i).getPX_position() <= products.get(i).getPX_position() && allWilds.get(i).getX_position() >= products.get(i).getX_position() && allWilds.get(i).getX_position() >= products.get(i).getPX_position()) {
                             //TODO
                             //remove the domestic
