@@ -13,6 +13,15 @@ public class Animal {
     int CurrentTime;
     int Producttime;
     int Productcurrenttime;
+int Price;
+
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
+    }
 
     public static int getTime() {
         return time;

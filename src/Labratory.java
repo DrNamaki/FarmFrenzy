@@ -11,6 +11,15 @@ public class Labratory {
     int InitialPrice(){
         return this.Level;
     }
+String Name;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
     public void setActive(boolean active) {
         Active = active;

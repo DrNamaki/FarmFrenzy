@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Manger {
+public class Manger<pubilc> {
     public ArrayList<DomesticAnimal> domestics = new ArrayList<>();
     public ArrayList<WildAnimal> Wilds = new ArrayList<>();
     public ArrayList<DefenderAnimal> Defenders = new ArrayList<>();
@@ -8,13 +8,16 @@ public class Manger {
     public ArrayList<WildAnimal> allWilds = new ArrayList<>();
     public ArrayList<DefenderAnimal> allDefenders = new ArrayList<>();
     public ArrayList<Cage> cages = new ArrayList<>();
-    Bank bank = new Bank();
+    Bank bank = new Bank(1000);
     public ArrayList<Labratory> labratories = new ArrayList<>();
     public ArrayList<Product> products = new ArrayList<>();
     WareHouse wareHouse = new WareHouse();
     int Grass[][] = new int[6][6];
     public ArrayList<HameKare> CurrentCages = new ArrayList<>();
-
+    int level;
+    static int turn=0;
+    Truck truck=new Truck();
+    WaterWell well=new WaterWell();
     void FillTheGrass() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
@@ -22,11 +25,88 @@ public class Manger {
             }
         }
     }
-
     public void BuyAnimal(String name) {
-
+for(int i=0;i<domestics.size();i++){
+    if(domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
+        bank.setCoin(bank.getCoin()-domestics.get(i).getPrice());
+       // generate an animal
+       //TODO
     }
-
+}
+    }
+public void Well(){
+if(well.getCapacity()==0){
+    well.setCapacity(5);
+}
+else System.out.println("the water well is already not empty");
+}
+ public void Plant(int x,int y){
+        if(well.getCapacity()>0){
+           Grass[x][y]+=1;
+           well.setCapacity(well.getCapacity()-1);
+        }
+        else System.out.println("the water well is empty");
+ }
+ public void Workshop(String name){
+        for(int i=0;i<labratories.size();i++){
+            if(labratories.get(i).getName().equalsIgnoreCase(name)){
+                if(labratories.get(i).IsBuyed){
+                    labratories.get(i).Active=true;
+                }
+            }
+        }
+ }
+ public void BuildWorkShop(String name){
+    for(int i=0;i<labratories.size();i++){
+        if(labratories.get(i).getName().equalsIgnoreCase(name)){
+            labratories.get(i).IsBuyed=true;
+        }
+    }
+ }
+ public void PickUp(int x,int y){
+        for(int i=0;i<products.size();i++){
+            if(products.get(i).getX_position()==x&&products.get(i).getY_position()==y){
+                if(AddToWareHouse(products.get(i))){
+                    //TODO
+                    //remove the good from the list
+                }
+            }
+        }
+ }
+ public void TruckLoad(String name){
+      if(!truck.Active){
+          //TODO
+          //set for both product and animaland for unload
+          for(int i=0;i<wareHouse.products.size();i++){
+              if(wareHouse.products.get(i).getNameOfProduct().equalsIgnoreCase(name)){
+                  if(truck.getAvailableCapacity()>=wareHouse.products.get(i).getSizeInWarehouse()){
+                      //TODO
+                      truck.setAvailableCapacity(truck.getAvailableCapacity()-wareHouse.products.get(i).getSizeInWarehouse());
+                      truck.allgood.add(name);
+                      truck.setMoney(truck.getMoney()+wareHouse.products.get(i).getPrice());
+                      wareHouse.products.remove(i);
+                      break;
+                  }
+              }
+          }
+      }
+ }
+ public void TruckUnload(String name){
+      if(!truck.Active){
+          for(int i=0;i<truck.allgood.size();i++){
+              if(truck.allgood.get(i).equalsIgnoreCase(name)){
+                  //TODO
+                  //generate the good to the warehouselist
+                  truck.allgood.remove(i);
+                  break;
+              }
+          }
+      }
+ }
+ public void TruckGo(){
+        truck.Active=true;
+        truck.setEndedTime(turn+10);
+ }
     public void ProductProcessing() {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).isActive()) {
@@ -117,7 +197,6 @@ public class Manger {
         }
 
     }
-
     public void RemoveDeadAnimals() {
         for (int i = 0; i < domestics.size(); i++) {
             domestics.get(i).setCurrentTime(domestics.get(i).getCurrentTime() - 1);
@@ -126,7 +205,6 @@ public class Manger {
         }
 
     }
-
     public void RemoveCorruptProducts() {
         for (int i = 0; i < products.size(); i++) {
             products.get(i).setCurrentTime(products.get(i).getCurrentTime() - 1);
@@ -134,7 +212,6 @@ public class Manger {
                 products.remove(i);
         }
     }
-
     public void ProducingProduct() {
         for (int i = 0; i < allDomestics.size(); i++) {
             allDomestics.get(i).setProductcurrenttime(allDomestics.get(i).getProductcurrenttime() - 1);
@@ -160,7 +237,6 @@ public class Manger {
 
 
     }
-
     public void Eating() {
         for (int i = 0; i < allDomestics.size(); i++) {
             if (allDomestics.get(i).isLive && allDomestics.get(i).getCurrentTime() <= 5) {
@@ -176,7 +252,6 @@ public class Manger {
             }
         }
     }
-
     public boolean AddToWareHouse(Product product) {
         if (wareHouse.AvailableCapacity >= product.SizeInWarehouse) {
             wareHouse.products.add(product);
@@ -184,7 +259,6 @@ public class Manger {
         }
         return false;
     }
-
     public boolean AddToWareHouse(Animal animal) {
         if (wareHouse.AvailableCapacity >= animal.SizaInWareHouse) {
             wareHouse.animals.add(animal);
@@ -192,7 +266,6 @@ public class Manger {
         }
         return false;
     }
-
     public void Cage(int x, int y) {
         int a = 0;
         for (int i = 0; i < cages.size(); i++) {
@@ -209,7 +282,6 @@ public class Manger {
             }
         }
     }
-
     public void Cage() {
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getCurrrenttime() != 0) {
@@ -240,7 +312,6 @@ public class Manger {
             }
         }
     }
-
     public void Walk() {
         //TODO
         // tamame adad dakhel ro bayad ghadr begiram
@@ -331,7 +402,6 @@ public class Manger {
                 allDomestics.get(i).setY_position(allDomestics.get(i).getY_position() - 1);
         }
     }
-
     public void Intersection() {
         for (int i = 0; i < allDomestics.size(); i++) {
             if (allDomestics.get(i).getCurrentTime() <= 5) {
@@ -491,15 +561,19 @@ public class Manger {
         }
         //baraye alaf ham bezanam
     }
-
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
-            {
+
                 RemoveCorruptProducts();
                 RemoveDeadAnimals();
                 ProductProcessing();
                 ProducingProduct();
-            }
+           if(truck.Active){
+               if(turn==truck.EndedTime){
+                   truck.Active=false;
+                   bank.setCoin(bank.getCoin()+truck.getMoney());
+               }
+           }
 
 
             //checking cage

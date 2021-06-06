@@ -8,8 +8,17 @@ public class Product {
     boolean Harvested;
     void ToLive(){};
     int SizeInWarehouse;
+int Price;
 
-    public Product(int currentTime,int x_position, int y_position, boolean harvested) {
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
+    }
+
+    public Product(int currentTime, int x_position, int y_position, boolean harvested) {
         CurrentTime = currentTime;
         X_position = x_position;
         Y_position = y_position;
