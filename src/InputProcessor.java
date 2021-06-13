@@ -3,12 +3,17 @@ import java.util.Scanner;
 public class InputProcessor {
     private Manager manager;
     private Scanner scanner = new Scanner(System.in);
-
+boolean runn=false;
     public InputProcessor(Manager manager) {
         this.manager = manager;
     }
 
     public void run() {
+        if(!runn){
+            runn=true;
+            manager.readloggerfile();
+
+        }
         String getCommand = "";
         System.out.println("Enter the desired command:");
         getCommand = scanner.nextLine();
@@ -16,7 +21,7 @@ public class InputProcessor {
         while (true) {
             boolean loginToAccount = false;
             String userName , password ;
-            if (add.length == 1 && add[0].equals("SIGNUP")) {
+            if (add.length == 1 && add[0].equalsIgnoreCase("SIGNUP")) {
                 System.out.println("Enter a username : ");
                 userName = scanner.next();
                 //TODO
@@ -25,7 +30,7 @@ public class InputProcessor {
                 //TODO
                 loginToAccount = true;
             }
-            else if(add.length == 1 && add[0].equals("LOG IN"))
+            else if(add.length == 1 && add[0].equalsIgnoreCase("LOG IN"))
             {
                 System.out.println("Enter your username : ");
                 userName = scanner.next();
@@ -50,7 +55,7 @@ public class InputProcessor {
                     while (!getCommand.equals("EXIT")) {
                         getCommand = scanner.nextLine();
                         add = getCommand.split("\\s+");
-                        if (add.length == 2 && add[0].equals("BUY")) {
+                        if (add.length == 2 && add[0].equalsIgnoreCase("BUY")) {
                             manager.BuyAnimal(add[1]);
                         } else if (add.length == 3 && add[0].equals("PICKUP") && add[1].matches("^[0-9]+$") &&
                                 add[2].matches("^[0-9]+$")) {

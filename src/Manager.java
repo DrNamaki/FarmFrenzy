@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Manager<pubilc> {
     public ArrayList<DomesticAnimal> domestics = new ArrayList<>();
@@ -9,6 +15,7 @@ public class Manager<pubilc> {
     public ArrayList<DefenderAnimal> allDefenders = new ArrayList<>();
     public ArrayList<Cage> cages = new ArrayList<>();
     Bank bank = new Bank(1000);
+    ArrayList<String> Logger = new ArrayList<>();
     public ArrayList<Labratory> labratories = new ArrayList<>();
     public ArrayList<Product> products = new ArrayList<>();
     WareHouse wareHouse = new WareHouse();
@@ -25,6 +32,8 @@ public class Manager<pubilc> {
                 Grass[i][j] = 0;
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the grass has been filled by 0");
     }
 
     public void BuyAnimal(String name) {
@@ -35,12 +44,16 @@ public class Manager<pubilc> {
                 //TODO
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the animal has been bought");
     }
 
     public void Well() {
         if (well.getCapacity() == 0) {
             well.setCapacity(5);
         } else System.out.println("the water well is already not empty");
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the well has been filled");
     }
 
     public void Plant(int x, int y) {
@@ -48,6 +61,8 @@ public class Manager<pubilc> {
             Grass[x][y] += 1;
             well.setCapacity(well.getCapacity() - 1);
         } else System.out.println("the water well is empty");
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the grass has been planted");
     }
 
     public void Workshop(String name) {
@@ -58,6 +73,8 @@ public class Manager<pubilc> {
                 }
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the workshop has been actived");
     }
 
     public void BuildWorkShop(String name) {
@@ -66,6 +83,8 @@ public class Manager<pubilc> {
                 labratories.get(i).IsBuyed = true;
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the workshop has been built");
     }
 
     public void PickUp(int x, int y) {
@@ -77,6 +96,8 @@ public class Manager<pubilc> {
                 }
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the good has been picked up");
     }
 
     public void TruckLoad(String name) {
@@ -96,6 +117,8 @@ public class Manager<pubilc> {
                 }
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the truck has been loaded");
     }
 
     public void TruckUnload(String name) {
@@ -109,11 +132,15 @@ public class Manager<pubilc> {
                 }
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the truck has been unloaded:)");
     }
 
     public void TruckGo() {
         truck.Active = true;
         truck.setEndedTime(turn + 10);
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"truck has gone");
     }
 
     public void ProductProcessing() {
@@ -204,7 +231,8 @@ public class Manager<pubilc> {
                 }
             } else System.out.println("We have not enough storage in ware house");
         }
-
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the product is generating");
     }
 
     public void RemoveDeadAnimals() {
@@ -213,7 +241,8 @@ public class Manager<pubilc> {
             if (domestics.get(i).getCurrentTime() <= 0)
                 domestics.remove(i);
         }
-
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the dead animal has been removed");
     }
 
     public void RemoveCorruptProducts() {
@@ -222,6 +251,8 @@ public class Manager<pubilc> {
             if (products.get(i).getCurrentTime() == 0)
                 products.remove(i);
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the dead product has been removed");
     }
 
     public void ProducingProduct() {
@@ -247,7 +278,8 @@ public class Manager<pubilc> {
             }
         }
 
-
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the product from animal has been produced");
     }
 
     public void Eating() {
@@ -264,9 +296,13 @@ public class Manager<pubilc> {
                 }
             }
         }
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the animal has eaten grass");
     }
 
     public boolean AddToWareHouse(Product product) {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"request to add to warehouse");
         if (wareHouse.AvailableCapacity >= product.SizeInWarehouse) {
             wareHouse.products.add(product);
             return true;
@@ -275,6 +311,8 @@ public class Manager<pubilc> {
     }
 
     public boolean AddToWareHouse(Animal animal) {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"request to add to warehouse");
         if (wareHouse.AvailableCapacity >= animal.SizaInWareHouse) {
             wareHouse.animals.add(animal);
             return true;
@@ -283,6 +321,8 @@ public class Manager<pubilc> {
     }
 
     public void Cage(int x, int y) {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the cage has been put");
         int a = 0;
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getX() == x && cages.get(i).getY() == y) {
@@ -300,6 +340,8 @@ public class Manager<pubilc> {
     }
 
     public void Cage() {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"the cage is working");
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getCurrrenttime() != 0) {
                 int a = 0;
@@ -331,6 +373,8 @@ public class Manager<pubilc> {
     }
 
     public void Walk() {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"walking");
         //TODO
         // tamame adad dakhel ro bayad ghadr begiram
         for (int i = 0; i < allWilds.size(); i++) {
@@ -422,6 +466,8 @@ public class Manager<pubilc> {
     }
 
     public void Intersection() {
+        LocalDateTime w=LocalDateTime.now();
+        Logger.add(w.toString()+"  "+"intersect");
         for (int i = 0; i < allDomestics.size(); i++) {
             if (allDomestics.get(i).getCurrentTime() <= 5) {
                 if (Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()] > 0) {
@@ -611,6 +657,38 @@ public class Manager<pubilc> {
             //Tabe barkhrd vahshi ba mahsool va ahli  vahsi ba sag  , gorbe ba mahsool
             //TODO
 
+        }
+    }
+    public void readloggerfile(){
+        try {
+            File myObj = new File("Logger.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                Logger.add(data);
+            }
+            myReader.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public void writeloggerfile(){
+        try {
+            FileWriter myWriter = new FileWriter("Logger.txt");
+            for(int i=0;i<Logger.size();i++){
+                myWriter.write(Logger.get(i)+"\r\n");
+            }
+
+
+
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        }
+        catch ( IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }
