@@ -659,7 +659,8 @@ public class Manager<pubilc> {
 
         }
     }
-    public void readloggerfile(){
+
+    public void readLoggerFile(){
         try {
             File myObj = new File("Logger.txt");
             Scanner myReader = new Scanner(myObj);
@@ -674,7 +675,8 @@ public class Manager<pubilc> {
             e.printStackTrace();
         }
     }
-    public void writeloggerfile(){
+
+    public void writeLoggerFile(){
         try {
             FileWriter myWriter = new FileWriter("Logger.txt");
             for(int i=0;i<Logger.size();i++){
