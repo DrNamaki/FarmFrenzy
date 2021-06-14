@@ -25,7 +25,8 @@ public class Manager<pubilc> {
     static int turn = 0;
     Truck truck = new Truck();
     WaterWell well = new WaterWell();
-
+    //TODO
+//filing the arraylist of each class that is needed
     public void FillTheGrass() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
@@ -37,15 +38,39 @@ public class Manager<pubilc> {
     }
 
     public void BuyAnimal(String name) {
-        for (int i = 0; i < domestics.size(); i++) {
-            if (domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)) {
-                bank.setCoin(bank.getCoin() - domestics.get(i).getPrice());
-                // generate an animal
-                //TODO
-            }
-        }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the animal has been bought");
+        int t=0;
+   for(int i=0;i<domestics.size();i++){
+       if(domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
+           if(bank.getCoin()>=domestics.get(i).getPrice()){
+               t=1;
+               bank.setCoin(bank.getCoin()-domestics.get(i).getPrice());
+           }
+       }
+   }
+   if(t==1){
+       if(name.equalsIgnoreCase("hen")){
+//TODO
+       }
+       if(name.equalsIgnoreCase("hen")){
+           Hen hen=new Hen();
+           allDomestics.add(hen);
+       }
+       if(name.equalsIgnoreCase("hen")){
+
+       }
+
+       if(name.equalsIgnoreCase("dog")){
+           Dog dog=new Dog();
+           allDefenders.add(dog);
+       }
+
+       if(name.equalsIgnoreCase("cat")){
+           Cat cat=new Cat();
+           allDefenders.add(cat);
+       }
+       LocalDateTime w=LocalDateTime.now();
+       Logger.add(w.toString()+"  "+"the animal has been bought");
+   }
     }
 
     public void Well() {
@@ -80,45 +105,63 @@ public class Manager<pubilc> {
     public void BuildWorkShop(String name) {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).getName().equalsIgnoreCase(name)) {
-                labratories.get(i).IsBuyed = true;
+                if(bank.getCoin()>=labratories.get(i).getPrice()){
+                    labratories.get(i).IsBuyed = true;
+                    bank.setCoin(bank.getCoin()-labratories.get(i).getPrice());
+                    LocalDateTime w=LocalDateTime.now();
+                    Logger.add(w.toString()+"  "+"the workshop has been built");
+                }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the workshop has been built");
+
     }
 
     public void PickUp(int x, int y) {
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getX_position() == x && products.get(i).getY_position() == y) {
                 if (AddToWareHouse(products.get(i))) {
-                    //TODO
-                    //remove the good from the list
+                   products.remove(i);
+                   i--;
+                    LocalDateTime w=LocalDateTime.now();
+                    Logger.add(w.toString()+"  "+"the good has been picked up");
                 }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the good has been picked up");
+
     }
 
     public void TruckLoad(String name) {
         if (!truck.Active) {
-            //TODO
-            //set for both product and animaland for unload
             for (int i = 0; i < wareHouse.products.size(); i++) {
                 if (wareHouse.products.get(i).getNameOfProduct().equalsIgnoreCase(name)) {
                     if (truck.getAvailableCapacity() >= wareHouse.products.get(i).getSizeInWarehouse()) {
-                        //TODO
                         truck.setAvailableCapacity(truck.getAvailableCapacity() - wareHouse.products.get(i).getSizeInWarehouse());
                         truck.allgood.add(name);
                         truck.setMoney(truck.getMoney() + wareHouse.products.get(i).getPrice());
                         wareHouse.products.remove(i);
+                        LocalDateTime w=LocalDateTime.now();
+                        Logger.add(w.toString()+"  "+"the truck has been loaded");
+                        i--;
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < wareHouse.animals.size(); i++) {
+                if (wareHouse.animals.get(i).getNameOfAnimal().equalsIgnoreCase(name)) {
+                    if (truck.getAvailableCapacity() >= wareHouse.animals.get(i).getSizaInWareHouse()) {
+                        truck.setAvailableCapacity(truck.getAvailableCapacity() - wareHouse.animals.get(i).getSizaInWareHouse());
+                        truck.allgood.add(name);
+                        truck.setMoney(truck.getMoney() + wareHouse.animals.get(i).getPrice());
+                        wareHouse.animals.remove(i);
+                        i--;
+                        LocalDateTime w=LocalDateTime.now();
+                        Logger.add(w.toString()+"  "+"the truck has been loaded");
                         break;
                     }
                 }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the truck has been loaded");
+
     }
 
     public void TruckUnload(String name) {
@@ -127,6 +170,8 @@ public class Manager<pubilc> {
                 if (truck.allgood.get(i).equalsIgnoreCase(name)) {
                     //TODO
                     //generate the good to the warehouselist
+                    Hen hen=new Hen();
+                    wareHouse.animals.add(hen);
                     truck.allgood.remove(i);
                     break;
                 }
@@ -240,6 +285,7 @@ public class Manager<pubilc> {
             domestics.get(i).setCurrentTime(domestics.get(i).getCurrentTime() - 1);
             if (domestics.get(i).getCurrentTime() <= 0)
                 domestics.remove(i);
+            i--;
         }
         LocalDateTime w=LocalDateTime.now();
         Logger.add(w.toString()+"  "+"the dead animal has been removed");
@@ -250,9 +296,11 @@ public class Manager<pubilc> {
             products.get(i).setCurrentTime(products.get(i).getCurrentTime() - 1);
             if (products.get(i).getCurrentTime() == 0)
                 products.remove(i);
+            i--;
+            LocalDateTime w=LocalDateTime.now();
+            Logger.add(w.toString()+"  "+"the dead product has been removed");
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the dead product has been removed");
+
     }
 
     public void ProducingProduct() {
@@ -291,13 +339,14 @@ public class Manager<pubilc> {
                                 k == allDomestics.get(i).getY_position()) {
                             allDomestics.get(i).setCurrentTime(DomesticAnimal.time);
                             Grass[j][k]--;
+                            LocalDateTime w=LocalDateTime.now();
+                            Logger.add(w.toString()+"  "+"the animal has eaten grass");
                         }
                     }
                 }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the animal has eaten grass");
+
     }
 
     public boolean AddToWareHouse(Product product) {
@@ -387,8 +436,9 @@ public class Manager<pubilc> {
                     allWilds.get(i).setX_position(allWilds.get(i).getX_position() + 1);
                 }
             } else {
-                //TODO
-                //remove the dead allwildanimals
+
+                allWilds.remove(i);
+                i--;
             }
         }
         for (int i = 0; i < allDefenders.size(); i++) {
@@ -629,11 +679,12 @@ public class Manager<pubilc> {
 
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
-
+            Eating();
             RemoveCorruptProducts();
             RemoveDeadAnimals();
             ProductProcessing();
             ProducingProduct();
+            Walk();
             if (truck.Active) {
                 if (turn == truck.EndedTime) {
                     truck.Active = false;
@@ -659,7 +710,6 @@ public class Manager<pubilc> {
 
         }
     }
-
     public void readLoggerFile(){
         try {
             File myObj = new File("Logger.txt");
@@ -675,7 +725,6 @@ public class Manager<pubilc> {
             e.printStackTrace();
         }
     }
-
     public void writeLoggerFile(){
         try {
             FileWriter myWriter = new FileWriter("Logger.txt");

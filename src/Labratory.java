@@ -3,6 +3,8 @@ public class Labratory {
     int Y_Position;
     int Level;
     void WorkToDo(){};
+    int Price;
+
     void TimeToDo(){};
     int Time;
     int CurrentTime;
@@ -15,6 +17,14 @@ String Name;
 
     public String getName() {
         return Name;
+    }
+
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
     }
 
     public void setName(String name) {
