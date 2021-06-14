@@ -676,7 +676,26 @@ public class Manager<pubilc> {
         }
         //baraye alaf ham bezanam
     }
-
+public void Inquiary(){
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                System.out.print(Grass[i][j]);
+            }
+            System.out.println();
+        }
+        for(int i=0;i<allDomestics.size();i++){
+            System.out.println(allDomestics.get(i).nameOfAnimal+" "+allDomestics.get(i).getX_position()+" "+allDomestics.get(i).getY_position());
+        }
+    for(int i=0;i<allWilds.size();i++){
+        System.out.println(allWilds.get(i).nameOfAnimal+" "+allWilds.get(i).getX_position()+" "+allWilds.get(i).getY_position());
+    }
+    for(int i=0;i<allDefenders.size();i++){
+        System.out.println(allDefenders.get(i).nameOfAnimal+" "+allDefenders.get(i).getX_position()+" "+allDefenders.get(i).getY_position());
+    }
+    for(int i=0;i<products.size();i++){
+        System.out.println(products.get(i).getNameOfProduct()+" "+products.get(i).getX_position()+" "+products.get(i).getY_position());
+    }
+}
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
             Eating();
@@ -685,6 +704,8 @@ public class Manager<pubilc> {
             ProductProcessing();
             ProducingProduct();
             Walk();
+            Cage();
+            Intersection();
             if (truck.Active) {
                 if (turn == truck.EndedTime) {
                     truck.Active = false;
@@ -709,6 +730,7 @@ public class Manager<pubilc> {
             //TODO
 
         }
+        Inquiary();
     }
     public void readLoggerFile(){
         try {
