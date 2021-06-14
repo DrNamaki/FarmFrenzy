@@ -3,5 +3,6 @@ public class Main {
         Manager manager=new Manager();
         InputProcessor input= new InputProcessor(manager);
         input.run();
+
     }
 }

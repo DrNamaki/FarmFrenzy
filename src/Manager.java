@@ -27,12 +27,23 @@ public class Manager<pubilc> {
     WaterWell well = new WaterWell();
     //TODO
 //filing the arraylist of each class that is needed
-    public void FillTheGrass() {
+    public void Fill() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 Grass[i][j] = 0;
             }
         }
+        //domestic
+        Dog dog=new Dog();
+        Cat cat=new Cat();
+        Tiger tiger=new Tiger();
+        Lion lion=new Lion();
+        Bear bear=new Bear();
+        Defenders.add(cat);
+        Defenders.add(dog);
+        Wilds.add(tiger);
+        Wilds.add(lion);
+        Wilds.add(bear);
         LocalDateTime w=LocalDateTime.now();
         Logger.add(w.toString()+"  "+"the grass has been filled by 0");
     }
@@ -533,8 +544,8 @@ public class Manager<pubilc> {
                         if (allDefenders.get(i).getX_position() == products.get(j).getX_position() && allDefenders.get(i).getY_position() == products.get(j).getY_position()) {
                             boolean s = AddToWareHouse(products.get(j));
                             if (s) {
-                                //TODO
-                                //remove product from the list
+                               products.remove(j);
+                               j--;
                             }
                         }
                     }
@@ -545,44 +556,51 @@ public class Manager<pubilc> {
         for (int i = 0; i < allDefenders.size(); i++) {
             if (allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("dog")) {
                 for (int j = 0; j < allWilds.size(); j++) {
-                    if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
+                    if (allWilds.get(j).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                         if (allDefenders.get(i).getX_position() == allWilds.get(j).getX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                            //TODO
+                           allWilds.remove(j);
+                           j--;
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
-                        } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
-                            if (allWilds.get(i).getPX_position() <= allDefenders.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDefenders.get(i).getX_position() && allWilds.get(i).getX_position() >= allDefenders.get(i).getPX_position()) {
-                                //TODO
+                        } else if (allWilds.get(j).getX_position() > allWilds.get(j).getPX_position()) {
+                            if (allWilds.get(j).getPX_position() <= allDefenders.get(i).getX_position() && allWilds.get(j).getPX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(j).getX_position() >= allDefenders.get(i).getX_position() && allWilds.get(j).getX_position() >= allDefenders.get(i).getPX_position()) {
+                                allWilds.remove(j);
+                               j--;
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                                 sagzapas.add(allDefenders.get(i));
                             }
-                        } else if (allWilds.get(i).getX_position() < allWilds.get(i).getPX_position()) {
-                            if (allWilds.get(i).getX_position() <= allDefenders.get(i).getX_position() && allWilds.get(i).getX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(i).getPX_position() >= allDefenders.get(i).getX_position() && allWilds.get(i).getPX_position() >= allDefenders.get(i).getPX_position()) {
-                                //TODO
+                        } else if (allWilds.get(j).getX_position() < allWilds.get(j).getPX_position()) {
+                            if (allWilds.get(j).getX_position() <= allDefenders.get(i).getX_position() && allWilds.get(j).getX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(j).getPX_position() >= allDefenders.get(i).getX_position() && allWilds.get(j).getPX_position() >= allDefenders.get(i).getPX_position()) {
+                                allWilds.remove(j);
+                                j--;
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                                 sagzapas.add(allDefenders.get(i));
                             }
 
-                        } else if (allWilds.get(i).getY_position() > allWilds.get(i).getPY_position()) {
-                            if (allWilds.get(i).getPY_position() <= allDefenders.get(i).getY_position() && allWilds.get(i).getPY_position() <= allDefenders.get(i).getPY_position() && allWilds.get(i).getY_position() >= allDefenders.get(i).getY_position() && allWilds.get(i).getY_position() >= allDefenders.get(i).getPY_position()) {
-                                //TODO
+                        } else if (allWilds.get(j).getY_position() > allWilds.get(j).getPY_position()) {
+                            if (allWilds.get(j).getPY_position() <= allDefenders.get(i).getY_position() && allWilds.get(j).getPY_position() <= allDefenders.get(i).getPY_position() && allWilds.get(j).getY_position() >= allDefenders.get(i).getY_position() && allWilds.get(j).getY_position() >= allDefenders.get(i).getPY_position()) {
+                                allWilds.remove(j);
+                                j--;
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                                 sagzapas.add(allDefenders.get(i));
                             }
-                        } else if (allWilds.get(i).getY_position() < allWilds.get(i).getPY_position()) {
-                            if (allWilds.get(i).getY_position() <= allDefenders.get(i).getY_position() && allWilds.get(i).getY_position() <= allDefenders.get(i).getPY_position() && allWilds.get(i).getPY_position() >= allDefenders.get(i).getY_position() && allWilds.get(i).getPY_position() >= allDefenders.get(i).getPY_position()) {
-                                //TODO
+                        } else if (allWilds.get(j).getY_position() < allWilds.get(j).getPY_position()) {
+                            if (allWilds.get(j).getY_position() <= allDefenders.get(i).getY_position() && allWilds.get(j).getY_position() <= allDefenders.get(i).getPY_position() && allWilds.get(j).getPY_position() >= allDefenders.get(i).getY_position() && allWilds.get(j).getPY_position() >= allDefenders.get(i).getPY_position()) {
+                                allWilds.remove(j);
+                                j--;
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                                 sagzapas.add(allDefenders.get(i));
                             }
                         }
                     } else {
                         if (allDefenders.get(i).getX_position() == allWilds.get(j).getX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                            //TODO
+                            allWilds.remove(j);
+                            j--;
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
                         } else if (allDefenders.get(i).getX_position() == allWilds.get(j).getPX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getPY_position()) {
-                            //TODO
+                            allWilds.remove(j);
+                            j--;
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
                         }
@@ -590,15 +608,15 @@ public class Manager<pubilc> {
                 }
             }
         }
-        //TODO
+
         //deleting the list of sagzapas from alldefenders
+        sagzapas.clear();
         for (int i = 0; i < allDomestics.size(); i++) {
             for (int j = 0; j < allWilds.size(); j++) {
                 if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (allDomestics.get(i).getX_position() == allWilds.get(j).getX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                        //TODO
-                        //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
-                        sagzapas.add(allDefenders.get(i));
+                       allWilds.remove(i);
+                       i--;
                     } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getPX_position() <= allDomestics.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDomestics.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getPX_position()) {
                             //TODO
