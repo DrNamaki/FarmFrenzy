@@ -1,19 +1,18 @@
+import java.util.Random;
+
 public class Animal {
-    static final int time = 10 ;
+     int time = 10 ;
     String nameOfAnimal ;
     int X_position;
     int Y_position;
     int PX_position;
     int PY_position;
-    void RandomWalk(){};
-    void Voice(){};
-    void WorkToDo(){};
     boolean isLive;
     int SizaInWareHouse;
     int CurrentTime;
     int Producttime;
     int Productcurrenttime;
-int Price;
+    int Price;
 
     public int getPrice() {
         return Price;
@@ -23,8 +22,23 @@ int Price;
         Price = price;
     }
 
-    public static int getTime() {
+    public  Animal() {
+        Random rand=new Random();
+        int a=0,b=5;
+        int x=rand.nextInt((b-a)+1)+a;
+        int y=rand.nextInt((b-a)+1)+a;;
+        X_position =x;
+        Y_position = y;
+        this.isLive = true;
+
+    }
+
+    public int getTime() {
         return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public void setNameOfAnimal(String nameOfAnimal) {

@@ -25,15 +25,19 @@ public class Manager<pubilc> {
     static int turn = 0;
     Truck truck = new Truck();
     WaterWell well = new WaterWell();
-    //TODO
-//filing the arraylist of each class that is needed
+
     public void Fill() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 Grass[i][j] = 0;
             }
         }
-        //domestic
+       Ostrich ostrich=new Ostrich();
+        Sheep sheep=new Sheep();
+        Hen hen=new Hen();
+        domestics.add(ostrich);
+        domestics.add(hen);
+        domestics.add(sheep);
         Dog dog=new Dog();
         Cat cat=new Cat();
         Tiger tiger=new Tiger();
@@ -60,14 +64,16 @@ public class Manager<pubilc> {
    }
    if(t==1){
        if(name.equalsIgnoreCase("hen")){
-//TODO
-       }
-       if(name.equalsIgnoreCase("hen")){
            Hen hen=new Hen();
            allDomestics.add(hen);
        }
-       if(name.equalsIgnoreCase("hen")){
-
+       if(name.equalsIgnoreCase("bufallo")){
+           Sheep sheep=new Sheep();
+           allDomestics.add(sheep);
+       }
+       if(name.equalsIgnoreCase("turkey")){
+           Ostrich ostrich=new Ostrich();
+           allDomestics.add(ostrich);
        }
 
        if(name.equalsIgnoreCase("dog")){
@@ -184,12 +190,13 @@ public class Manager<pubilc> {
                     Hen hen=new Hen();
                     wareHouse.animals.add(hen);
                     truck.allgood.remove(i);
+                    LocalDateTime w=LocalDateTime.now();
+                    Logger.add(w.toString()+"  "+"the truck has been unloaded:)");
                     break;
                 }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the truck has been unloaded:)");
+
     }
 
     public void TruckGo() {
@@ -348,7 +355,7 @@ public class Manager<pubilc> {
                     for (int k = 0; k < 6; k++) {
                         if (j == allDomestics.get(i).getX_position() &&
                                 k == allDomestics.get(i).getY_position()) {
-                            allDomestics.get(i).setCurrentTime(DomesticAnimal.time);
+                            allDomestics.get(i).setCurrentTime(allDomestics.get(i).getTime());
                             Grass[j][k]--;
                             LocalDateTime w=LocalDateTime.now();
                             Logger.add(w.toString()+"  "+"the animal has eaten grass");
@@ -418,15 +425,18 @@ public class Manager<pubilc> {
                 if (cages.get(i).getCurrentcagetime() != 0) {
                     boolean s = AddToWareHouse(cages.get(i).getWildanimal());
                     if (s) {
-                        //TODO
-                        //remove the cage and the wildanimal from theirlist
+
+                        allWilds.remove(cages.get(i).getWildanimal());
+
                     }
                     if (!s) {
                         cages.get(i).setCurrentcagetime(cages.get(i).getCurrentcagetime() - 1);
                     }
                 } else {
-                    //TODO
+
                     //remove the cage and let the wild animal go
+                    cages.remove(cages.get(i));
+                    i--;
                 }
             }
         }

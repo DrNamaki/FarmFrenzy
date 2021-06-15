@@ -8,7 +8,7 @@ public class Product {
     boolean Harvested;
     void ToLive(){};
     int SizeInWarehouse;
-int Price;
+    int Price;
 
     public int getPrice() {
         return Price;
