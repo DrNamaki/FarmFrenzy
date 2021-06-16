@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class Animal {
+    int sort;
+    // to sort the animals by their time of birth
      int time = 10 ;
     String nameOfAnimal ;
     int X_position;
@@ -13,6 +15,14 @@ public class Animal {
     int Producttime;
     int Productcurrenttime;
     int Price;
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
 
     public int getPrice() {
         return Price;

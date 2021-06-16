@@ -15,11 +15,13 @@ public class InputProcessor {
             manager.readLoggerFile();
 
         }
+        manager.Fill();
         String getCommand = "";
         System.out.println("Enter the desired command:");
         getCommand = scanner.nextLine();
         String[] add = getCommand.split("\\s+");
         while (true) {
+
             boolean loginToAccount = true;//changed
             String userName, password;
 //            if (add.length == 1 && add[0].equalsIgnoreCase("SIGNUP")) {

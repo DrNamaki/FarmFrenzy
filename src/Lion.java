@@ -1,4 +1,5 @@
 public class Lion extends WildAnimal {
+    static int ord;
     public Lion() {
         super();
         this.nameOfAnimal="lion" ;

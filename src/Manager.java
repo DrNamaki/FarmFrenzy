@@ -14,7 +14,7 @@ public class Manager<pubilc> {
     public ArrayList<WildAnimal> allWilds = new ArrayList<>();
     public ArrayList<DefenderAnimal> allDefenders = new ArrayList<>();
     public ArrayList<Cage> cages = new ArrayList<>();
-    Bank bank = new Bank(1000);
+    Bank bank = new Bank(100000000);
     ArrayList<String> Logger = new ArrayList<>();
     public ArrayList<Labratory> labratories = new ArrayList<>();
     public ArrayList<Product> products = new ArrayList<>();
@@ -62,28 +62,45 @@ public class Manager<pubilc> {
            }
        }
    }
+        for(int i=0;i<Defenders.size();i++){
+            if(Defenders.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
+                if(bank.getCoin()>=Defenders.get(i).getPrice()){
+                    t=1;
+                    bank.setCoin(bank.getCoin()-Defenders.get(i).getPrice());
+                }
+            }
+        }
    if(t==1){
        if(name.equalsIgnoreCase("hen")){
            Hen hen=new Hen();
            allDomestics.add(hen);
+           t=0;
+           System.out.println("hen");
        }
-       if(name.equalsIgnoreCase("bufallo")){
+      else if(name.equalsIgnoreCase("sheep")){
+           System.out.println("sheep");
            Sheep sheep=new Sheep();
            allDomestics.add(sheep);
+
+           t=0;
        }
-       if(name.equalsIgnoreCase("turkey")){
+      else if(name.equalsIgnoreCase("ostrich")){
            Ostrich ostrich=new Ostrich();
            allDomestics.add(ostrich);
+           System.out.println("ostrich");
+           t=0;
        }
 
-       if(name.equalsIgnoreCase("dog")){
+     else  if(name.equalsIgnoreCase("dog")){
            Dog dog=new Dog();
            allDefenders.add(dog);
+           t=0;
        }
 
-       if(name.equalsIgnoreCase("cat")){
+      else if(name.equalsIgnoreCase("cat")){
            Cat cat=new Cat();
            allDefenders.add(cat);
+           t=0;
        }
        LocalDateTime w=LocalDateTime.now();
        Logger.add(w.toString()+"  "+"the animal has been bought");
@@ -707,7 +724,7 @@ public class Manager<pubilc> {
 public void Inquiary(){
         for(int i=0;i<6;i++){
             for(int j=0;j<6;j++){
-                System.out.print(Grass[i][j]);
+                System.out.print(Grass[i][j]+" ");
             }
             System.out.println();
         }
@@ -758,7 +775,9 @@ public void Inquiary(){
             //TODO
 
         }
-        Inquiary();
+        for(int i=0;i<Logger.size();i++){
+            System.out.println(Logger.get(i));
+        }
     }
     public void readLoggerFile(){
         try {
