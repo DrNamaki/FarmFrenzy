@@ -731,13 +731,13 @@ public void Inquiary(){
             System.out.println();
         }
         for(int i=0;i<allDomestics.size();i++){
-            System.out.println(allDomestics.get(i).nameOfAnimal+" "+allDomestics.get(i).getX_position()+" "+allDomestics.get(i).getY_position());
+            System.out.println(allDomestics.get(i).nameOfAnimal+" "+allDomestics.get(i).getSort()+" "+allDomestics.get(i).getX_position()+" "+allDomestics.get(i).getY_position());
         }
     for(int i=0;i<allWilds.size();i++){
-        System.out.println(allWilds.get(i).nameOfAnimal+" "+allWilds.get(i).getX_position()+" "+allWilds.get(i).getY_position());
+        System.out.println(allWilds.get(i).nameOfAnimal+" "+allWilds.get(i).getSort()+" "+allWilds.get(i).getX_position()+" "+allWilds.get(i).getY_position());
     }
     for(int i=0;i<allDefenders.size();i++){
-        System.out.println(allDefenders.get(i).nameOfAnimal+" "+allDefenders.get(i).getX_position()+" "+allDefenders.get(i).getY_position());
+        System.out.println(allDefenders.get(i).nameOfAnimal+" "+allDefenders.get(i).getSort()+" "+allDefenders.get(i).getX_position()+" "+allDefenders.get(i).getY_position());
     }
     for(int i=0;i<products.size();i++){
         System.out.println(products.get(i).getNameOfProduct()+" "+products.get(i).getX_position()+" "+products.get(i).getY_position());
