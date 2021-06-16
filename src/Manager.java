@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager<pubilc> {
-    public ArrayList<DomesticAnimal> domestics = new ArrayList<>();
+    public ArrayList<DomesticAnimal> Domestics = new ArrayList<>();
     public ArrayList<WildAnimal> Wilds = new ArrayList<>();
     public ArrayList<DefenderAnimal> Defenders = new ArrayList<>();
     public ArrayList<DomesticAnimal> allDomestics = new ArrayList<>();
@@ -17,6 +17,7 @@ public class Manager<pubilc> {
     Bank bank = new Bank(100000000);
     ArrayList<String> Logger = new ArrayList<>();
     public ArrayList<Labratory> labratories = new ArrayList<>();
+    //fill this list by labratories;
     public ArrayList<Product> products = new ArrayList<>();
     WareHouse wareHouse = new WareHouse();
     int Grass[][] = new int[6][6];
@@ -29,15 +30,15 @@ public class Manager<pubilc> {
     public void Fill() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                Grass[i][j] = 0;
+                Grass[i][j] = 5;
             }
         }
        Ostrich ostrich=new Ostrich();
         Sheep sheep=new Sheep();
         Hen hen=new Hen();
-        domestics.add(ostrich);
-        domestics.add(hen);
-        domestics.add(sheep);
+        Domestics.add(ostrich);
+        Domestics.add(hen);
+        Domestics.add(sheep);
         Dog dog=new Dog();
         Cat cat=new Cat();
         Tiger tiger=new Tiger();
@@ -53,12 +54,13 @@ public class Manager<pubilc> {
     }
 
     public void BuyAnimal(String name) {
-        int t=0;
-   for(int i=0;i<domestics.size();i++){
-       if(domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
-           if(bank.getCoin()>=domestics.get(i).getPrice()){
+        int t=1;
+   for(int i = 0; i< Domestics.size(); i++){
+       if(Domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
+           if(bank.getCoin()>= Domestics.get(i).getPrice()){
                t=1;
-               bank.setCoin(bank.getCoin()-domestics.get(i).getPrice());
+               bank.setCoin(bank.getCoin()- Domestics.get(i).getPrice());
+               System.out.println("bank");
            }
        }
    }
@@ -316,10 +318,10 @@ public class Manager<pubilc> {
     }
 
     public void RemoveDeadAnimals() {
-        for (int i = 0; i < domestics.size(); i++) {
-            domestics.get(i).setCurrentTime(domestics.get(i).getCurrentTime() - 1);
-            if (domestics.get(i).getCurrentTime() <= 0)
-                domestics.remove(i);
+        for (int i = 0; i < Domestics.size(); i++) {
+            Domestics.get(i).setCurrentTime(Domestics.get(i).getCurrentTime() - 1);
+            if (Domestics.get(i).getCurrentTime() <= 0)
+                Domestics.remove(i);
             i--;
         }
         LocalDateTime w=LocalDateTime.now();
