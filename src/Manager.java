@@ -225,7 +225,7 @@ public class Manager<pubilc> {
         Logger.add(w.toString()+"  "+"truck has gone");
     }
 
-    public void ProductProcessing() {
+       public void ProductProcessing() {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).isActive()) {
                 labratories.get(i).setCurrentTime(labratories.get(i).getCurrentTime() - 1);
@@ -245,42 +245,42 @@ public class Manager<pubilc> {
                     primaryProduct = "Cloth";
                 else if (labratories.get(i) instanceof IceCreamShop)
                     primaryProduct = "PackagedMilk";
-
+//wareHouseRemove
                 boolean IsFoundPrimaryProduct = false;
-                for (int j = 0; j < products.size(); j++) {
+                for (int j = 0; j < wareHouse.products.size(); j++) {
                     if (primaryProduct.equals("Egg")) {
-                        if (products.get(i) instanceof Egg) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof Egg) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
                     } else if (primaryProduct.equals("Feather")) {
-                        if (products.get(i) instanceof Feather) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof Feather) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
                     } else if (primaryProduct.equals("Milk")) {
-                        if (products.get(i) instanceof Milk) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof Milk) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
                     } else if (primaryProduct.equals("Flour")) {
-                        if (products.get(i) instanceof Flour) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof Flour) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
                     } else if (primaryProduct.equals("Cloth")) {
-                        if (products.get(i) instanceof Cloth) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof Cloth) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
                     } else if (primaryProduct.equals("PackagedMilk")) {
-                        if (products.get(i) instanceof PackagedMilk) {
-                            products.remove(i);
+                        if (wareHouse.products.get(i) instanceof PackagedMilk) {
+                            wareHouse.products.remove(i);
                             IsFoundPrimaryProduct = true;
                             break;
                         }
@@ -313,10 +313,9 @@ public class Manager<pubilc> {
                 }
             } else System.out.println("We have not enough storage in ware house");
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the product is generating");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the product is generating");
     }
-
     public void RemoveDeadAnimals() {
         for (int i = 0; i < Domestics.size(); i++) {
             Domestics.get(i).setCurrentTime(Domestics.get(i).getCurrentTime() - 1);

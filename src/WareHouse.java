@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+﻿import java.util.ArrayList;
 
 public class WareHouse {
     int Level;
@@ -14,6 +14,14 @@ public class WareHouse {
     }
     boolean CanSellOrStore() {
         return true;
+    }
+    public void addProduct(Product product)
+    {
+      this.products.add(product);
+    }
+    public void addAnimal(Animal animal)
+    {
+        this.animals.add(animal);
     }
 
     void Sell() {
