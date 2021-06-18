@@ -382,13 +382,15 @@ public class Manager<pubilc> {
             if (allDomestics.get(i).isLive && allDomestics.get(i).getCurrentTime() <= 5) {
                 for (int j = 0; j < 6; j++) {
                     for (int k = 0; k < 6; k++) {
-                        if (j == allDomestics.get(i).getX_position() &&
-                                k == allDomestics.get(i).getY_position()) {
-                            allDomestics.get(i).setCurrentTime(allDomestics.get(i).getTime());
-                            Grass[j][k]--;
-                            LocalDateTime w = LocalDateTime.now();
-                            Logger.add(w.toString() + "  " + "the animal has eaten grass");
-                        }
+                      if(Grass[k][j]>0){
+                          if (j == allDomestics.get(i).getY_position() &&
+                                  k == allDomestics.get(i).getX_position()) {
+                              allDomestics.get(i).setCurrentTime(allDomestics.get(i).getTime());
+                              Grass[j][k]--;
+                              LocalDateTime w=LocalDateTime.now();
+                              Logger.add(w.toString()+"  "+"the animal has eaten grass");
+                          }
+                      }
                     }
                 }
             }
@@ -474,8 +476,6 @@ public class Manager<pubilc> {
     public void Walk() {
         LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString() + "  " + "walking");
-        //TODO
-        // tamame adad dakhel ro bayad ghadr begiram
         for (int i = 0; i < allWilds.size(); i++) {
             if (allWilds.get(i).getCurrentTime() > 0 && allWilds.get(i).getX_position() < 6) {
                 if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
@@ -496,8 +496,8 @@ public class Manager<pubilc> {
                 int r = 0, x = 0, y = 0;
                 for (int j = 0; j < products.size(); j++) {
                     if (products.get(j).getNameOfProduct().equalsIgnoreCase("egg") || products.get(j).getNameOfProduct().equalsIgnoreCase("milk") || products.get(j).getNameOfProduct().equalsIgnoreCase("feather")) {
-                        if (r <= (products.get(j).getX_position() + products.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position())) {
-                            r = (products.get(j).getX_position() + products.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position());
+                        if (r <= Math.abs(products.get(j).getX_position() + products.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position())) {
+                            r = Math.abs(products.get(j).getX_position() + products.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position());
                             x = products.get(j).getX_position();
                             y = products.get(j).getY_position();
                         }
@@ -519,8 +519,8 @@ public class Manager<pubilc> {
             if (allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("dog")) {
                 int r = 0, x = 0, y = 0;
                 for (int j = 0; j < allWilds.size(); j++) {
-                    if (r <= (allWilds.get(j).getX_position() + allWilds.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position())) {
-                        r = (allWilds.get(j).getX_position() + allWilds.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position());
+                    if (r <= Math.abs(allWilds.get(j).getX_position() + allWilds.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position())) {
+                        r = Math.abs(allWilds.get(j).getX_position() + allWilds.get(j).getY_position() - allDefenders.get(i).getX_position() - allDefenders.get(i).getX_position());
                         x = allWilds.get(j).getX_position();
                         y = allWilds.get(j).getY_position();
                     }
@@ -543,10 +543,12 @@ public class Manager<pubilc> {
             int r = 0, x = 0, y = 0;
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 6; k++) {
-                    if (r <= (k + j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position())) {
-                        r = (k + j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position());
-                        x = k;
-                        y = k;
+                    if(Grass[j][k]>0){
+                        if (r <= Math.abs(k + j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position())) {
+                            r = Math.abs(k + j - allDomestics.get(i).getX_position() - allDomestics.get(i).getX_position());
+                            x = k;
+                            y = j;
+                        }
                     }
                 }
             }
@@ -742,7 +744,7 @@ public class Manager<pubilc> {
             System.out.println();
         }
         for (int i = 0; i < allDomestics.size(); i++) {
-            System.out.println(allDomestics.get(i).nameOfAnimal + " " + allDomestics.get(i).getSort() + " " + allDomestics.get(i).getX_position() + " " + allDomestics.get(i).getY_position());
+            System.out.println(allDomestics.get(i).nameOfAnimal + " " + allDomestics.get(i).getSort() + " " + allDomestics.get(i).getX_position() + " " + allDomestics.get(i).getY_position()+" "+allDomestics.get(i).getCurrentTime());
         }
         for (int i = 0; i < allWilds.size(); i++) {
             System.out.println(allWilds.get(i).nameOfAnimal + " " + allWilds.get(i).getSort() + " " + allWilds.get(i).getX_position() + " " + allWilds.get(i).getY_position());
