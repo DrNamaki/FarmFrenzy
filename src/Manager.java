@@ -577,13 +577,11 @@ public class Manager {
         for (int i = 0; i < allDefenders.size(); i++) {
             if (allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("cat")) {
                 for (int j = 0; j < products.size(); j++) {
-                    if (products.get(i).getNameOfProduct().equalsIgnoreCase("feather") || products.get(i).getNameOfProduct().equalsIgnoreCase("milk") || products.get(i).getNameOfProduct().equalsIgnoreCase("egg")) {
-                        if (allDefenders.get(i).getX_position() == products.get(j).getX_position() && allDefenders.get(i).getY_position() == products.get(j).getY_position()) {
-                            boolean s = AddToWareHouse(products.get(j));
-                            if (s) {
-                                products.remove(j);
-                                j--;
-                            }
+                    if (allDefenders.get(i).getX_position() == products.get(j).getX_position() && allDefenders.get(i).getY_position() == products.get(j).getY_position()) {
+                        boolean s = AddToWareHouse(products.get(j));
+                        if (s) {
+                            products.remove(j);
+                            j--;
                         }
                     }
                 }
@@ -647,89 +645,111 @@ public class Manager {
         }
 
         //deleting the list of sagzapas from alldefenders
+        // the idea by sagzapas is not valuable
+        for(int i=0;i<allDefenders.size();i++){
+            if(allDefenders.get(i).getNameOfAnimal().equalsIgnoreCase("dog")){
+                for(int j=0;j<sagzapas.size();j++){
+                    if(allDefenders.get(i).getSort()==sagzapas.get(j).getSort()){
+                        allDefenders.remove(i);
+                        i--;
+                    }
+                }
+            }
+        }
         sagzapas.clear();
         for (int i = 0; i < allDomestics.size(); i++) {
             for (int j = 0; j < allWilds.size(); j++) {
-                if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
+                if (allWilds.get(j).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (allDomestics.get(i).getX_position() == allWilds.get(j).getX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                        allWilds.remove(i);
+                        allDomestics.remove(i);
                         i--;
                     } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getPX_position() <= allDomestics.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDomestics.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getPX_position()) {
-                            //TODO
-                            //remove the domestic
+                            allDomestics.remove(i);
+                            i--;
 
                         }
                     } else if (allWilds.get(i).getX_position() < allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getX_position() <= allDomestics.get(i).getX_position() && allWilds.get(i).getX_position() <= allDomestics.get(i).getPX_position() && allWilds.get(i).getPX_position() >= allDomestics.get(i).getX_position() && allWilds.get(i).getPX_position() >= allDomestics.get(i).getPX_position()) {
-                            //TODO
-                            //remove domestic
+                            allDomestics.remove(i);
+                            i--;
                         }
 
                     } else if (allWilds.get(i).getY_position() > allWilds.get(i).getPY_position()) {
                         if (allWilds.get(i).getPY_position() <= allDomestics.get(i).getY_position() && allWilds.get(i).getPY_position() <= allDomestics.get(i).getPY_position() && allWilds.get(i).getY_position() >= allDomestics.get(i).getY_position() && allWilds.get(i).getY_position() >= allDomestics.get(i).getPY_position()) {
-                            //TODO
-                            //remove domestic
+                            allDomestics.remove(i);
+                            i--;
                         }
                     } else if (allWilds.get(i).getY_position() < allWilds.get(i).getPY_position()) {
                         if (allWilds.get(i).getY_position() <= allDomestics.get(i).getY_position() && allWilds.get(i).getY_position() <= allDomestics.get(i).getPY_position() && allWilds.get(i).getPY_position() >= allDomestics.get(i).getY_position() && allWilds.get(i).getPY_position() >= allDomestics.get(i).getPY_position()) {
-                            //TODO
-                            //remove domestic
+                            allDomestics.remove(i);
+                            i--;
                         }
                     }
                 } else {
                     if (allDomestics.get(i).getX_position() == allWilds.get(j).getX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                        //TODO
-                        //remove domestic
+                        allDomestics.remove(i);
+                        i--;
                     } else if (allDomestics.get(i).getX_position() == allWilds.get(j).getPX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getPY_position()) {
-                        //TODO
-                        //remove domestic
+                        allDomestics.remove(i);
+                        i--;
                     }
                 }
             }
         }
         for (int i = 0; i < products.size(); i++) {
             for (int j = 0; j < allWilds.size(); j++) {
-                if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
+                if (allWilds.get(j).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (products.get(i).getX_position() == allWilds.get(j).getX_position() && products.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                        //TODO
-                        //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
-                        sagzapas.add(allDefenders.get(i));
-                    } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
-                        if (allWilds.get(i).getPX_position() <= products.get(i).getX_position() && allWilds.get(i).getPX_position() <= products.get(i).getPX_position() && allWilds.get(i).getX_position() >= products.get(i).getX_position() && allWilds.get(i).getX_position() >= products.get(i).getPX_position()) {
-                            //TODO
-                            //remove the domestic
+                        products.remove(i);
+                        i--;
+                    } else if (allWilds.get(j).getX_position() > allWilds.get(j).getPX_position()) {
+                        if (allWilds.get(j).getPX_position() <= products.get(i).getX_position() && allWilds.get(j).getPX_position() <= products.get(i).getPX_position() && allWilds.get(j).getX_position() >= products.get(i).getX_position() && allWilds.get(j).getX_position() >= products.get(i).getPX_position()) {
+                            products.remove(i);
+                            i--;
 
                         }
-                    } else if (allWilds.get(i).getX_position() < allWilds.get(i).getPX_position()) {
-                        if (allWilds.get(i).getX_position() <= products.get(i).getX_position() && allWilds.get(i).getX_position() <= products.get(i).getPX_position() && allWilds.get(i).getPX_position() >= products.get(i).getX_position() && allWilds.get(i).getPX_position() >= products.get(i).getPX_position()) {
-                            //TODO
-                            //remove domestic
+                    } else if (allWilds.get(j).getX_position() < allWilds.get(j).getPX_position()) {
+                        if (allWilds.get(j).getX_position() <= products.get(i).getX_position() && allWilds.get(j).getX_position() <= products.get(i).getPX_position() && allWilds.get(j).getPX_position() >= products.get(i).getX_position() && allWilds.get(j).getPX_position() >= products.get(i).getPX_position()) {
+                            products.remove(i);
+                            i--;
                         }
 
-                    } else if (allWilds.get(i).getY_position() > allWilds.get(i).getPY_position()) {
-                        if (allWilds.get(i).getPY_position() <= products.get(i).getY_position() && allWilds.get(i).getPY_position() <= products.get(i).getPY_position() && allWilds.get(i).getY_position() >= products.get(i).getY_position() && allWilds.get(i).getY_position() >= products.get(i).getPY_position()) {
-                            //TODO
-                            //remove domestic
+                    } else if (allWilds.get(j).getY_position() > allWilds.get(i).getPY_position()) {
+                        if (allWilds.get(j).getPY_position() <= products.get(i).getY_position() && allWilds.get(j).getPY_position() <= products.get(i).getPY_position() && allWilds.get(j).getY_position() >= products.get(i).getY_position() && allWilds.get(j).getY_position() >= products.get(i).getPY_position()) {
+                            products.remove(i);
+                            i--;
                         }
-                    } else if (allWilds.get(i).getY_position() < allWilds.get(i).getPY_position()) {
-                        if (allWilds.get(i).getY_position() <= products.get(i).getY_position() && allWilds.get(i).getY_position() <= products.get(i).getPY_position() && allWilds.get(i).getPY_position() >= products.get(i).getY_position() && allWilds.get(i).getPY_position() >= products.get(i).getPY_position()) {
-                            //TODO
-                            //remove domestic
+                    } else if (allWilds.get(j).getY_position() < allWilds.get(i).getPY_position()) {
+                        if (allWilds.get(j).getY_position() <= products.get(i).getY_position() && allWilds.get(j).getY_position() <= products.get(i).getPY_position() && allWilds.get(j).getPY_position() >= products.get(i).getY_position() && allWilds.get(j).getPY_position() >= products.get(i).getPY_position()) {
+                            products.remove(i);
+                            i--;
                         }
                     }
                 } else {
                     if (products.get(i).getX_position() == allWilds.get(j).getX_position() && products.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                        //TODO
-                        //remove domestic
+                        products.remove(i);
+                        i--;
                     } else if (products.get(i).getX_position() == allWilds.get(j).getPX_position() && products.get(i).getY_position() == allWilds.get(j).getPY_position()) {
-                        //TODO
-                        //remove domestic
+                        products.remove(i);
+                        i--;
                     }
                 }
             }
         }
-        //baraye alaf ham bezanam
+        for(int i=0;i<allWilds.size();i++){
+            Grass[allWilds.get(i).getY_position()][allWilds.get(i).getX_position()]=0;
+        }
+        for(int i=0;i<allWilds.size();i++){
+            for(int j=0;j<allDefenders.size();j++){
+                if(allDefenders.get(j).getNameOfAnimal().equalsIgnoreCase("cat")){
+                    if(allWilds.get(i).getY_position()==allDefenders.get(j).getY_position()&&allWilds.get(i).getX_position()==allDefenders.get(j).getX_position()){
+                        allDefenders.remove(j);
+                    }
+                }
+            }
+
+        }
     }
 
     public void Inquiary() {
