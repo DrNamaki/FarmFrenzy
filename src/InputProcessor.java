@@ -68,7 +68,6 @@ public class InputProcessor {
                             }else if (add.length == 3 && add[0].equalsIgnoreCase("BUILD") &&
                                     add[1].equalsIgnoreCase("Workshop")) {
                                 manager.BuildWorkShop(add[2]);
-                                manager.ProductProcessing();
                             }else if (add.length == 2 && add[0].equalsIgnoreCase("WORK")) {
                                 manager.Workshop(add[1]);
                             } else if (add.length == 3 && add[0].equalsIgnoreCase("CAGE") && add[1].matches("^[0-9]+$") &&

@@ -18,13 +18,14 @@ public class Product {
         Price = price;
     }
 
-    public Product(int currentTime, int x_position, int y_position, boolean harvested) {
+    public Product(String nameOfProduct ,int currentTime, int x_position, int y_position, boolean harvested) {
         CurrentTime = currentTime;
         X_position = x_position;
         Y_position = y_position;
         PX_position = x_position;
         PY_position = y_position;
         Harvested = harvested;
+        this.nameOfProduct = nameOfProduct;
     }
 
     public String getNameOfProduct() {

@@ -1,5 +1,4 @@
-﻿import java.util.ArrayList;
-
+import java.util.ArrayList;
 public class WareHouse {
     int Level;
     static final int Capacity = 30;

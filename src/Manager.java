@@ -33,88 +33,91 @@ public class Manager<pubilc> {
                 Grass[i][j] = 5;
             }
         }
-       Ostrich ostrich=new Ostrich();
-        Sheep sheep=new Sheep();
-        Hen hen=new Hen();
+        Ostrich ostrich = new Ostrich();
+        Sheep sheep = new Sheep();
+        Hen hen = new Hen();
         Domestics.add(ostrich);
         Domestics.add(hen);
         Domestics.add(sheep);
-        Dog dog=new Dog();
-        Cat cat=new Cat();
-        Tiger tiger=new Tiger();
-        Lion lion=new Lion();
-        Bear bear=new Bear();
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+        Tiger tiger = new Tiger();
+        Lion lion = new Lion();
+        Bear bear = new Bear();
         Defenders.add(cat);
         Defenders.add(dog);
         Wilds.add(tiger);
         Wilds.add(lion);
         Wilds.add(bear);
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the grass has been filled by 0");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the grass has been filled by 0");
+
+
+        //fill this list by labratories:
+        labratories.add(new Bakery());
+        labratories.add(new FlourFactory());
+        labratories.add(new IceCreamShop());
+        labratories.add(new MilkPackagingFactory());
+        labratories.add(new Tailoring());
+        labratories.add(new WeavingFactory());
     }
 
     public void BuyAnimal(String name) {
-        int t=1;
-   for(int i = 0; i< Domestics.size(); i++){
-       if(Domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
-           if(bank.getCoin()>= Domestics.get(i).getPrice()){
-               t=1;
-               bank.setCoin(bank.getCoin()- Domestics.get(i).getPrice());
-               System.out.println("bank");
-           }
-       }
-   }
-        for(int i=0;i<Defenders.size();i++){
-            if(Defenders.get(i).getNameOfAnimal().equalsIgnoreCase(name)){
-                if(bank.getCoin()>=Defenders.get(i).getPrice()){
-                    t=1;
-                    bank.setCoin(bank.getCoin()-Defenders.get(i).getPrice());
+        int t = 1;
+        for (int i = 0; i < Domestics.size(); i++) {
+            if (Domestics.get(i).getNameOfAnimal().equalsIgnoreCase(name)) {
+                if (bank.getCoin() >= Domestics.get(i).getPrice()) {
+                    t = 1;
+                    bank.setCoin(bank.getCoin() - Domestics.get(i).getPrice());
+                    System.out.println("bank");
                 }
             }
         }
-   if(t==1){
-       if(name.equalsIgnoreCase("hen")){
-           Hen hen=new Hen();
-           allDomestics.add(hen);
-           t=0;
-           System.out.println("hen");
-       }
-      else if(name.equalsIgnoreCase("sheep")){
-           System.out.println("sheep");
-           Sheep sheep=new Sheep();
-           allDomestics.add(sheep);
+        for (int i = 0; i < Defenders.size(); i++) {
+            if (Defenders.get(i).getNameOfAnimal().equalsIgnoreCase(name)) {
+                if (bank.getCoin() >= Defenders.get(i).getPrice()) {
+                    t = 1;
+                    bank.setCoin(bank.getCoin() - Defenders.get(i).getPrice());
+                }
+            }
+        }
+        if (t == 1) {
+            if (name.equalsIgnoreCase("hen")) {
+                Hen hen = new Hen();
+                allDomestics.add(hen);
+                t = 0;
+                System.out.println("hen");
+            } else if (name.equalsIgnoreCase("sheep")) {
+                System.out.println("sheep");
+                Sheep sheep = new Sheep();
+                allDomestics.add(sheep);
 
-           t=0;
-       }
-      else if(name.equalsIgnoreCase("ostrich")){
-           Ostrich ostrich=new Ostrich();
-           allDomestics.add(ostrich);
-           System.out.println("ostrich");
-           t=0;
-       }
-
-     else  if(name.equalsIgnoreCase("dog")){
-           Dog dog=new Dog();
-           allDefenders.add(dog);
-           t=0;
-       }
-
-      else if(name.equalsIgnoreCase("cat")){
-           Cat cat=new Cat();
-           allDefenders.add(cat);
-           t=0;
-       }
-       LocalDateTime w=LocalDateTime.now();
-       Logger.add(w.toString()+"  "+"the animal has been bought");
-   }
+                t = 0;
+            } else if (name.equalsIgnoreCase("ostrich")) {
+                Ostrich ostrich = new Ostrich();
+                allDomestics.add(ostrich);
+                System.out.println("ostrich");
+                t = 0;
+            } else if (name.equalsIgnoreCase("dog")) {
+                Dog dog = new Dog();
+                allDefenders.add(dog);
+                t = 0;
+            } else if (name.equalsIgnoreCase("cat")) {
+                Cat cat = new Cat();
+                allDefenders.add(cat);
+                t = 0;
+            }
+            LocalDateTime w = LocalDateTime.now();
+            Logger.add(w.toString() + "  " + "the animal has been bought");
+        }
     }
 
     public void Well() {
         if (well.getCapacity() == 0) {
             well.setCapacity(5);
         } else System.out.println("the water well is already not empty");
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the well has been filled");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the well has been filled");
     }
 
     public void Plant(int x, int y) {
@@ -122,8 +125,8 @@ public class Manager<pubilc> {
             Grass[x][y] += 1;
             well.setCapacity(well.getCapacity() - 1);
         } else System.out.println("the water well is empty");
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the grass has been planted");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the grass has been planted");
     }
 
     public void Workshop(String name) {
@@ -134,18 +137,18 @@ public class Manager<pubilc> {
                 }
             }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the workshop has been actived");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the workshop has been actived");
     }
 
     public void BuildWorkShop(String name) {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).getName().equalsIgnoreCase(name)) {
-                if(bank.getCoin()>=labratories.get(i).getPrice()){
+                if (bank.getCoin() >= labratories.get(i).getPrice()) {
                     labratories.get(i).IsBuyed = true;
-                    bank.setCoin(bank.getCoin()-labratories.get(i).getPrice());
-                    LocalDateTime w=LocalDateTime.now();
-                    Logger.add(w.toString()+"  "+"the workshop has been built");
+                    bank.setCoin(bank.getCoin() - labratories.get(i).getPrice());
+                    LocalDateTime w = LocalDateTime.now();
+                    Logger.add(w.toString() + "  " + "the workshop has been built");
                 }
             }
         }
@@ -153,13 +156,14 @@ public class Manager<pubilc> {
     }
 
     public void PickUp(int x, int y) {
+
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getX_position() == x && products.get(i).getY_position() == y) {
                 if (AddToWareHouse(products.get(i))) {
-                   products.remove(i);
-                   i--;
-                    LocalDateTime w=LocalDateTime.now();
-                    Logger.add(w.toString()+"  "+"the good has been picked up");
+                    products.remove(i);
+                    i--;
+                    LocalDateTime w = LocalDateTime.now();
+                    Logger.add(w.toString() + "  " + "the good has been picked up");
                 }
             }
         }
@@ -175,8 +179,8 @@ public class Manager<pubilc> {
                         truck.allgood.add(name);
                         truck.setMoney(truck.getMoney() + wareHouse.products.get(i).getPrice());
                         wareHouse.products.remove(i);
-                        LocalDateTime w=LocalDateTime.now();
-                        Logger.add(w.toString()+"  "+"the truck has been loaded");
+                        LocalDateTime w = LocalDateTime.now();
+                        Logger.add(w.toString() + "  " + "the truck has been loaded");
                         i--;
                         break;
                     }
@@ -190,8 +194,8 @@ public class Manager<pubilc> {
                         truck.setMoney(truck.getMoney() + wareHouse.animals.get(i).getPrice());
                         wareHouse.animals.remove(i);
                         i--;
-                        LocalDateTime w=LocalDateTime.now();
-                        Logger.add(w.toString()+"  "+"the truck has been loaded");
+                        LocalDateTime w = LocalDateTime.now();
+                        Logger.add(w.toString() + "  " + "the truck has been loaded");
                         break;
                     }
                 }
@@ -206,11 +210,11 @@ public class Manager<pubilc> {
                 if (truck.allgood.get(i).equalsIgnoreCase(name)) {
                     //TODO
                     //generate the good to the warehouselist
-                    Hen hen=new Hen();
+                    Hen hen = new Hen();
                     wareHouse.animals.add(hen);
                     truck.allgood.remove(i);
-                    LocalDateTime w=LocalDateTime.now();
-                    Logger.add(w.toString()+"  "+"the truck has been unloaded:)");
+                    LocalDateTime w = LocalDateTime.now();
+                    Logger.add(w.toString() + "  " + "the truck has been unloaded:)");
                     break;
                 }
             }
@@ -221,11 +225,11 @@ public class Manager<pubilc> {
     public void TruckGo() {
         truck.Active = true;
         truck.setEndedTime(turn + 10);
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"truck has gone");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "truck has gone");
     }
 
-       public void ProductProcessing() {
+    public void ProductProcessing() {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).isActive()) {
                 labratories.get(i).setCurrentTime(labratories.get(i).getCurrentTime() - 1);
@@ -287,44 +291,47 @@ public class Manager<pubilc> {
                     }
                 }
                 if (!IsFoundPrimaryProduct) {
-                    System.out.println("We have no " + primaryProduct + " in ware house to provide flour");
+                    System.out.println("We have no " + primaryProduct + " in ware house to provide");
                 } else if (wareHouse.getAllCapacity() <= 30) {
                     if (primaryProduct.equals("Egg")) {
-                        products.add(new Flour(Flour.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new Flour(Flour.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
                     } else if (primaryProduct.equals("Feather")) {
-                        products.add(new Cloth(Cloth.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new Cloth(Cloth.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
                     } else if (primaryProduct.equals("Milk")) {
-                        products.add(new PackagedMilk(PackagedMilk.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new PackagedMilk(PackagedMilk.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
                     } else if (primaryProduct.equals("Flour")) {
-                        products.add(new Bread(Bread.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new Bread(Bread.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
                     } else if (primaryProduct.equals("Cloth")) {
-                        products.add(new Shirt(Shirt.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new Shirt(Shirt.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
 
                     } else if (primaryProduct.equals("PackagedMilk")) {
-                        products.add(new IceCream(IceCream.timeOfCorrupting, labratories.get(i).getX_Positin(),
+                        products.add(new IceCream(IceCream.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
 
                     }
                 }
+                labratories.get(i).setCurrentTime(labratories.get(i).getTime());
             } else System.out.println("We have not enough storage in ware house");
         }
         LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString() + "  " + "the product is generating");
     }
+
     public void RemoveDeadAnimals() {
-        for (int i = 0; i < Domestics.size(); i++) {
-            Domestics.get(i).setCurrentTime(Domestics.get(i).getCurrentTime() - 1);
-            if (Domestics.get(i).getCurrentTime() <= 0)
-                Domestics.remove(i);
-            i--;
+        for (int i = 0; i < allDomestics.size(); i++) {
+            allDomestics.get(i).setCurrentTime(allDomestics.get(i).getCurrentTime() - 1);
+            if (allDomestics.get(i).getCurrentTime() == 0) {
+                allDomestics.remove(i);
+                i--;
+            }
         }
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the dead animal has been removed");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the dead animal has been removed");
     }
 
     public void RemoveCorruptProducts() {
@@ -333,38 +340,42 @@ public class Manager<pubilc> {
             if (products.get(i).getCurrentTime() == 0)
                 products.remove(i);
             i--;
-            LocalDateTime w=LocalDateTime.now();
-            Logger.add(w.toString()+"  "+"the dead product has been removed");
+            LocalDateTime w = LocalDateTime.now();
+            Logger.add(w.toString() + "  " + "the dead product has been removed");
         }
 
     }
 
     public void ProducingProduct() {
+
         for (int i = 0; i < allDomestics.size(); i++) {
             allDomestics.get(i).setProductcurrenttime(allDomestics.get(i).getProductcurrenttime() - 1);
 
-            if (allDomestics.get(i).getProductcurrenttime() == 0) {
-                switch (allDomestics.get(i).getNameOfAnimal()) {
-                    case "Hen":
-                        products.add(new Egg(Egg.Time, allDomestics.get(i).X_position,
-                                allDomestics.get(i).Y_position, false));
-                        break;
-                    case "Ostrich":
-                        products.add(new Feather(Feather.Time, allDomestics.get(i).X_position,
-                                allDomestics.get(i).Y_position, false));
-                        break;
-                    case "Sheep":
-                        products.add(new Milk(Milk.Time, allDomestics.get(i).X_position,
-                                allDomestics.get(i).Y_position, false));
-                        break;
+
+            if (allDomestics.get(i).getProductcurrenttime() <= 0) {
+                if (allDomestics.get(i).getNameOfAnimal().equalsIgnoreCase("Hen")) {
+                    products.add(new Egg(Egg.Time, allDomestics.get(i).X_position,
+                            allDomestics.get(i).Y_position, false));
+                    allDomestics.get(i).setProductcurrenttime(Egg.Time);
+                    System.out.println("your egg is ready");
+                } else if (allDomestics.get(i).getNameOfAnimal().equalsIgnoreCase("Ostrich")) {
+                    products.add(new Feather(Feather.Time, allDomestics.get(i).X_position,
+                            allDomestics.get(i).Y_position, false));
+                    allDomestics.get(i).setProductcurrenttime(Feather.Time);
+                    System.out.println("your feather is ready");
+                } else if (allDomestics.get(i).getNameOfAnimal().equalsIgnoreCase("Sheep")) {
+                    products.add(new Milk(Milk.Time, allDomestics.get(i).X_position,
+                            allDomestics.get(i).Y_position, false));
+                    allDomestics.get(i).setProductcurrenttime(Milk.Time);
+                    System.out.println("your milk is ready");
                 }
-                allDomestics.get(i).setProductcurrenttime(allDomestics.get(i).getProductcurrenttime());
             }
+
         }
 
-        LocalDateTime w=LocalDateTime.now();
+    LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString()+"  "+"the product from animal has been produced");
-    }
+}
 
     public void Eating() {
         for (int i = 0; i < allDomestics.size(); i++) {
@@ -375,8 +386,8 @@ public class Manager<pubilc> {
                                 k == allDomestics.get(i).getY_position()) {
                             allDomestics.get(i).setCurrentTime(allDomestics.get(i).getTime());
                             Grass[j][k]--;
-                            LocalDateTime w=LocalDateTime.now();
-                            Logger.add(w.toString()+"  "+"the animal has eaten grass");
+                            LocalDateTime w = LocalDateTime.now();
+                            Logger.add(w.toString() + "  " + "the animal has eaten grass");
                         }
                     }
                 }
@@ -386,8 +397,8 @@ public class Manager<pubilc> {
     }
 
     public boolean AddToWareHouse(Product product) {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"request to add to warehouse");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "request to add to warehouse");
         if (wareHouse.AvailableCapacity >= product.SizeInWarehouse) {
             wareHouse.products.add(product);
             return true;
@@ -396,8 +407,8 @@ public class Manager<pubilc> {
     }
 
     public boolean AddToWareHouse(Animal animal) {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"request to add to warehouse");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "request to add to warehouse");
         if (wareHouse.AvailableCapacity >= animal.SizaInWareHouse) {
             wareHouse.animals.add(animal);
             return true;
@@ -406,8 +417,8 @@ public class Manager<pubilc> {
     }
 
     public void Cage(int x, int y) {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the cage has been put");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the cage has been put");
         int a = 0;
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getX() == x && cages.get(i).getY() == y) {
@@ -425,8 +436,8 @@ public class Manager<pubilc> {
     }
 
     public void Cage() {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"the cage is working");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "the cage is working");
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getCurrrenttime() != 0) {
                 int a = 0;
@@ -461,8 +472,8 @@ public class Manager<pubilc> {
     }
 
     public void Walk() {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"walking");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "walking");
         //TODO
         // tamame adad dakhel ro bayad ghadr begiram
         for (int i = 0; i < allWilds.size(); i++) {
@@ -555,8 +566,8 @@ public class Manager<pubilc> {
     }
 
     public void Intersection() {
-        LocalDateTime w=LocalDateTime.now();
-        Logger.add(w.toString()+"  "+"intersect");
+        LocalDateTime w = LocalDateTime.now();
+        Logger.add(w.toString() + "  " + "intersect");
         for (int i = 0; i < allDomestics.size(); i++) {
             if (allDomestics.get(i).getCurrentTime() <= 5) {
                 if (Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()] > 0) {
@@ -572,8 +583,8 @@ public class Manager<pubilc> {
                         if (allDefenders.get(i).getX_position() == products.get(j).getX_position() && allDefenders.get(i).getY_position() == products.get(j).getY_position()) {
                             boolean s = AddToWareHouse(products.get(j));
                             if (s) {
-                               products.remove(j);
-                               j--;
+                                products.remove(j);
+                                j--;
                             }
                         }
                     }
@@ -586,14 +597,14 @@ public class Manager<pubilc> {
                 for (int j = 0; j < allWilds.size(); j++) {
                     if (allWilds.get(j).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                         if (allDefenders.get(i).getX_position() == allWilds.get(j).getX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                           allWilds.remove(j);
-                           j--;
+                            allWilds.remove(j);
+                            j--;
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
                         } else if (allWilds.get(j).getX_position() > allWilds.get(j).getPX_position()) {
                             if (allWilds.get(j).getPX_position() <= allDefenders.get(i).getX_position() && allWilds.get(j).getPX_position() <= allDefenders.get(i).getPX_position() && allWilds.get(j).getX_position() >= allDefenders.get(i).getX_position() && allWilds.get(j).getX_position() >= allDefenders.get(i).getPX_position()) {
                                 allWilds.remove(j);
-                               j--;
+                                j--;
                                 //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                                 sagzapas.add(allDefenders.get(i));
                             }
@@ -643,8 +654,8 @@ public class Manager<pubilc> {
             for (int j = 0; j < allWilds.size(); j++) {
                 if (allWilds.get(i).getNameOfAnimal().equalsIgnoreCase("tiger")) {
                     if (allDomestics.get(i).getX_position() == allWilds.get(j).getX_position() && allDomestics.get(i).getY_position() == allWilds.get(j).getY_position()) {
-                       allWilds.remove(i);
-                       i--;
+                        allWilds.remove(i);
+                        i--;
                     } else if (allWilds.get(i).getX_position() > allWilds.get(i).getPX_position()) {
                         if (allWilds.get(i).getPX_position() <= allDomestics.get(i).getX_position() && allWilds.get(i).getPX_position() <= allDomestics.get(i).getPX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getX_position() && allWilds.get(i).getX_position() >= allDomestics.get(i).getPX_position()) {
                             //TODO
@@ -722,30 +733,37 @@ public class Manager<pubilc> {
         }
         //baraye alaf ham bezanam
     }
-public void Inquiary(){
-        for(int i=0;i<6;i++){
-            for(int j=0;j<6;j++){
-                System.out.print(Grass[i][j]+" ");
+
+    public void Inquiary() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                System.out.print(Grass[i][j] + " ");
             }
             System.out.println();
         }
-        for(int i=0;i<allDomestics.size();i++){
-            System.out.println(allDomestics.get(i).nameOfAnimal+" "+allDomestics.get(i).getSort()+" "+allDomestics.get(i).getX_position()+" "+allDomestics.get(i).getY_position());
+        for (int i = 0; i < allDomestics.size(); i++) {
+            System.out.println(allDomestics.get(i).nameOfAnimal + " " + allDomestics.get(i).getSort() + " " + allDomestics.get(i).getX_position() + " " + allDomestics.get(i).getY_position());
         }
-    for(int i=0;i<allWilds.size();i++){
-        System.out.println(allWilds.get(i).nameOfAnimal+" "+allWilds.get(i).getSort()+" "+allWilds.get(i).getX_position()+" "+allWilds.get(i).getY_position());
+        for (int i = 0; i < allWilds.size(); i++) {
+            System.out.println(allWilds.get(i).nameOfAnimal + " " + allWilds.get(i).getSort() + " " + allWilds.get(i).getX_position() + " " + allWilds.get(i).getY_position());
+        }
+        for (int i = 0; i < allDefenders.size(); i++) {
+            System.out.println(allDefenders.get(i).nameOfAnimal + " " + allDefenders.get(i).getSort() + " " + allDefenders.get(i).getX_position() + " " + allDefenders.get(i).getY_position());
+        }
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i).getNameOfProduct() + " " + products.get(i).getX_position() + " " + products.get(i).getY_position());
+        }
+        for (int i = 0 ; i < wareHouse.products.size(); i++)
+        {
+            System.out.println(wareHouse.products.get(i).getNameOfProduct()+ " " +
+                    wareHouse.products.get(i).getX_position()+" "+wareHouse.products.get(i).getY_position());
+        }
     }
-    for(int i=0;i<allDefenders.size();i++){
-        System.out.println(allDefenders.get(i).nameOfAnimal+" "+allDefenders.get(i).getSort()+" "+allDefenders.get(i).getX_position()+" "+allDefenders.get(i).getY_position());
-    }
-    for(int i=0;i<products.size();i++){
-        System.out.println(products.get(i).getNameOfProduct()+" "+products.get(i).getX_position()+" "+products.get(i).getY_position());
-    }
-}
+
     public void Turn(int n) {
         for (int j = 0; j < n; j++) {
             Eating();
-            RemoveCorruptProducts();
+            //RemoveCorruptProducts();
             RemoveDeadAnimals();
             ProductProcessing();
             ProducingProduct();
@@ -776,11 +794,12 @@ public void Inquiary(){
             //TODO
 
         }
-        for(int i=0;i<Logger.size();i++){
+        for (int i = 0; i < Logger.size(); i++) {
             System.out.println(Logger.get(i));
         }
     }
-    public void readLoggerFile(){
+
+    public void readLoggerFile() {
         try {
             File myObj = new File("Logger.txt");
             Scanner myReader = new Scanner(myObj);
@@ -789,25 +808,23 @@ public void Inquiary(){
                 Logger.add(data);
             }
             myReader.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    public void writeLoggerFile(){
+
+    public void writeLoggerFile() {
         try {
             FileWriter myWriter = new FileWriter("Logger.txt");
-            for(int i=0;i<Logger.size();i++){
-                myWriter.write(Logger.get(i)+"\r\n");
+            for (int i = 0; i < Logger.size(); i++) {
+                myWriter.write(Logger.get(i) + "\r\n");
             }
-
 
 
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
-        }
-        catch ( IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
