@@ -40,7 +40,7 @@ public class Animal {
         X_position =x;
         Y_position = y;
         this.isLive = true;
-
+this.CurrentTime=time;
     }
 
     public int getTime() {

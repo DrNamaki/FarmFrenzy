@@ -22,17 +22,18 @@ public class Manager {
     WareHouse wareHouse = new WareHouse();
     int Grass[][] = new int[6][6];
     public ArrayList<HameKare> CurrentCages = new ArrayList<>();
-    int level;
+    int CurrentLevel=0;
     static int turn = 0;
     Truck truck = new Truck();
     WaterWell well = new WaterWell();
-
+    Level level=new Level(CurrentLevel);
     public void Fill() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                Grass[i][j] = 5;
+                Grass[i][j] =0;
             }
         }
+        Grass[3][3]=10;
         Ostrich ostrich = new Ostrich();
         Sheep sheep = new Sheep();
         Hen hen = new Hen();
@@ -60,6 +61,33 @@ public class Manager {
         labratories.add(new MilkPackagingFactory());
         labratories.add(new Tailoring());
         labratories.add(new WeavingFactory());
+        try {
+            File myObj = new File("LevelTasks.txt");
+            Scanner myReader = new Scanner(myObj);
+            String data="";
+            int q=CurrentLevel+1;
+            int t=0;
+            while (myReader.hasNextLine()&& !(data = myReader.nextLine()).equalsIgnoreCase("Level"+" "+q)) {
+                if(data.equalsIgnoreCase("Level"+" "+ CurrentLevel)||t==1){
+                    t=1;
+                }
+                if(data.equalsIgnoreCase("Level"+" "+ CurrentLevel)) continue;
+                if(t==1){
+                    String[] split=data.split("\\s");
+                    if(split[0].equalsIgnoreCase("coin")) bank.setCoin(Integer.parseInt(split[1]));
+                   else if(split[0].equalsIgnoreCase("tiger")||split[0].equalsIgnoreCase("lion")||split[0].equalsIgnoreCase("bear")){
+                        level.RandomWildAnimal.put(split[0],Integer.parseInt(split[1]));
+                    }
+                    else{
+                        level.Tasks.put(split[0],Integer.parseInt(split[1]));
+                    }
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public void BuyAnimal(String name) {
@@ -775,6 +803,19 @@ public class Manager {
             System.out.println(wareHouse.products.get(i).getNameOfProduct() + " " +
                     wareHouse.products.get(i).getX_position() + " " + wareHouse.products.get(i).getY_position());
         }
+        int f=0;
+            for (String i : level.Tasks.keySet()) {
+                int t=0;
+               for(int j=0;j<products.size();j++){
+                   if(i.equalsIgnoreCase(products.get(j).getNameOfProduct())){
+                     t++;
+                   }
+                   System.out.println(i+" "+t+"/"+level.Tasks.get(i));
+                   if(t==level.Tasks.get(i)) f++;
+               }
+            }
+            if(f==level.Tasks.size()) System.out.println("YOU HAVE WON");
+
     }
 
     public void Turn(int n) {

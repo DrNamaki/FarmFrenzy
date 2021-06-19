@@ -1,4 +1,13 @@
+import java.util.HashMap;
+
 public class Level {
-    //TODO
-    // writhimg each task of a level in the form of int
+    int Level;
+    HashMap<String, Integer> RandomWildAnimal = new HashMap<String, Integer>();
+    HashMap<String, Integer> Tasks = new HashMap<String, Integer>();
+
+    public Level(int level) {
+        Level = level;
+       this.RandomWildAnimal = new HashMap<String, Integer>();
+      this.Tasks = new HashMap<String, Integer>();
+    }
 }
