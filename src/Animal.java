@@ -10,7 +10,7 @@ public class Animal {
     int PX_position;
     int PY_position;
     boolean isLive;
-    int SizaInWareHouse;
+    int SizeInWareHouse;
     int CurrentTime;
     int Producttime;
     int Productcurrenttime;
@@ -99,12 +99,12 @@ this.CurrentTime=time;
         isLive = live;
     }
 
-    public int getSizaInWareHouse() {
-        return SizaInWareHouse;
+    public int getSizeInWareHouse() {
+        return SizeInWareHouse;
     }
 
-    public void setSizaInWareHouse(int sizaInWareHouse) {
-        SizaInWareHouse = sizaInWareHouse;
+    public void setSizeInWareHouse(int sizeInWareHouse) {
+        SizeInWareHouse = sizeInWareHouse;
     }
 
     public int getCurrentTime() {

@@ -5,7 +5,7 @@ public class Ostrich extends DomesticAnimal{
         this.sort=ord;
         ord++;
         this.nameOfAnimal="ostrich" ;
-        this.SizaInWareHouse=1;
+        this.SizeInWareHouse =1;
         this.Producttime=3;
         this.Price=200;
     }

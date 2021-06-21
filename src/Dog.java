@@ -5,7 +5,7 @@ public class Dog extends DefenderAnimal{
         this.sort=ord;
         ord++;
         this.nameOfAnimal="dog" ;
-        this.SizaInWareHouse=2;
+        this.SizeInWareHouse =2;
         this.Producttime=0;
         this.Price=100;
     }

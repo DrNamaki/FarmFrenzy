@@ -1,7 +1,5 @@
 public class Cage {
     int Level;
-    void TimeToDo(){};
-    void WorkToDo(){};
     int time=3;
     int currrenttime=3;
     int power;
@@ -9,6 +7,7 @@ public class Cage {
     int currentcagetime=5;
 int x;
 int y;
+boolean Continiusly=false;
 WildAnimal Wildanimal;
 
     public WildAnimal getWildanimal() {
@@ -17,6 +16,15 @@ WildAnimal Wildanimal;
 
     public void setWildanimal(WildAnimal wildanimal) {
         Wildanimal = wildanimal;
+
+    }
+
+    public boolean isContiniusly() {
+        return Continiusly;
+    }
+
+    public void setContiniusly(boolean continiusly) {
+        Continiusly = continiusly;
     }
 
     public int getCagetime() {

@@ -5,7 +5,7 @@ static int ord=0;
         this.sort=ord;
         ord++;
         this.nameOfAnimal="hen" ;
-        this.SizaInWareHouse=1;
+        this.SizeInWareHouse =1;
         this.Producttime=2;
         this.Price=100;
     }

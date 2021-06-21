@@ -295,8 +295,8 @@ public void AddWildAnimal( int n){
             }
             for (int i = 0; i < wareHouse.animals.size(); i++) {
                 if (wareHouse.animals.get(i).getNameOfAnimal().equalsIgnoreCase(name)) {
-                    if (truck.getAvailableCapacity() >= wareHouse.animals.get(i).getSizaInWareHouse()) {
-                        truck.setAvailableCapacity(truck.getAvailableCapacity() - wareHouse.animals.get(i).getSizaInWareHouse());
+                    if (truck.getAvailableCapacity() >= wareHouse.animals.get(i).getSizeInWareHouse()) {
+                        truck.setAvailableCapacity(truck.getAvailableCapacity() - wareHouse.animals.get(i).getSizeInWareHouse());
                         truck.allgood.add(name);
                         truck.setMoney(truck.getMoney() + wareHouse.animals.get(i).getPrice());
                         wareHouse.animals.remove(i);
@@ -458,7 +458,7 @@ public void AddWildAnimal( int n){
     public boolean AddToWareHouse(Animal animal) {
         LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString() + "  " + "request to add to warehouse");
-        if (wareHouse.AvailableCapacity >= animal.SizaInWareHouse) {
+        if (wareHouse.AvailableCapacity >= animal.SizeInWareHouse) {
             wareHouse.animals.add(animal);
             return true;
         }
@@ -469,16 +469,20 @@ public void AddWildAnimal( int n){
         LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString() + "  " + "the cage has been put");
         int a = 0;
+
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getX() == x && cages.get(i).getY() == y) {
                 a = 1;
+                cages.get(i).setContiniusly(true);
+                System.out.println(1);
             }
         }
         if (a == 0) {
             for (int j = 0; j < allWilds.size(); j++) {
                 if (allWilds.get(j).getX_position() == x && allWilds.get(j).getY_position() == y) {
-                    Cage cage = new Cage(x, y, allWilds.get(j));
+                    Cage cage = new Cage(allWilds.get(j).getX_position(), allWilds.get(j).getY_position(), allWilds.get(j));
                     cages.add(cage);
+                    System.out.println("cage");
                 }
             }
         }
@@ -490,11 +494,18 @@ public void AddWildAnimal( int n){
         for (int i = 0; i < cages.size(); i++) {
             if (cages.get(i).getCurrrenttime() != 0) {
                 int a = 0;
-                for (int j = 0; j < CurrentCages.size(); j++) {
-                    if (cages.get(i).getX() == CurrentCages.get(j).getX() && cages.get(i).getY() == CurrentCages.get(j).getY()) {
-                        cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime() - 1);
-                        a = 1;
-                    }
+//                for (int j = 0; j < CurrentCages.size(); j++) {
+////                    if (cages.get(i).getX() == CurrentCages.get(j).getX() && cages.get(i).getY() == CurrentCages.get(j).getY()) {
+////                        cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime() - 1);
+////                        a = 1;
+////                    }
+//
+//                }
+                if(cages.get(i).Continiusly){
+                    a=1;
+                    cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime() - 1);
+                    cages.get(i).setContiniusly(false);
+                    System.out.println("goal");
                 }
                 if (a == 0) {
                     cages.get(i).setCurrrenttime(cages.get(i).getCurrrenttime() + 1);
@@ -505,7 +516,8 @@ public void AddWildAnimal( int n){
                     if (s) {
 
                         allWilds.remove(cages.get(i).getWildanimal());
-
+                        cages.remove(i);
+                        System.out.println("super");
                     }
                     if (!s) {
                         cages.get(i).setCurrentcagetime(cages.get(i).getCurrentcagetime() - 1);
@@ -611,6 +623,10 @@ public void AddWildAnimal( int n){
                 allDomestics.get(i).setY_position(allDomestics.get(i).getY_position() + 1);
             else if (y < allDomestics.get(i).getY_position())
                 allDomestics.get(i).setY_position(allDomestics.get(i).getY_position() - 1);
+        }
+        for(int i=0;i<cages.size();i++){
+            cages.get(i).setX(cages.get(i).getWildanimal().getX_position());
+            cages.get(i).setY(cages.get(i).getWildanimal().getY_position());
         }
     }
 
@@ -831,6 +847,9 @@ public void AddWildAnimal( int n){
         for (int i = 0; i < wareHouse.products.size(); i++) {
             System.out.println(wareHouse.products.get(i).getNameOfProduct() + " " +
                     wareHouse.products.get(i).getX_position() + " " + wareHouse.products.get(i).getY_position());
+        }
+        for(int i=0;i<cages.size();i++){
+            System.out.println(cages.get(i).getX()+"  "+cages.get(i).getX()+"  "+cages.get(i).getWildanimal().getNameOfAnimal() );
         }
         int f=0;
             for (String i : level.Tasks.keySet()) {
