@@ -1,0 +1,16 @@
+Level 1
+200 coins
+egg 4
+Level 2
+300 coins
+egg 5
+Level 3
+400 coins
+egg 5
+Level 4
+500 coins
+egg 6
+Level 5
+200 coins
+tiger 5
+egg 7

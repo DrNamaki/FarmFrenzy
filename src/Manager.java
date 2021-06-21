@@ -23,7 +23,7 @@ public class Manager {
     int Grass[][] = new int[6][6];
     public ArrayList<HameKare> CurrentCages = new ArrayList<>();
     int CurrentLevel=0;
-    static int turn = 0;
+    static int turn = 1;
     Truck truck = new Truck();
     WaterWell well = new WaterWell();
     Level level=new Level(CurrentLevel);
@@ -42,14 +42,14 @@ public class Manager {
         Domestics.add(sheep);
         Dog dog = new Dog();
         Cat cat = new Cat();
-        Tiger tiger = new Tiger();
-        Lion lion = new Lion();
-        Bear bear = new Bear();
+        Tiger tiger1 = new Tiger();
+        Lion lion1 = new Lion();
+        Bear bear1 = new Bear();
         Defenders.add(cat);
         Defenders.add(dog);
-        Wilds.add(tiger);
-        Wilds.add(lion);
-        Wilds.add(bear);
+        Wilds.add(tiger1);
+        Wilds.add(lion1);
+        Wilds.add(bear1);
         LocalDateTime w = LocalDateTime.now();
         Logger.add(w.toString() + "  " + "the grass has been filled by 0");
 
@@ -88,8 +88,26 @@ public class Manager {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
 
+    }
+public void AddWildAnimal( int n){
+    for (String i : level.RandomWildAnimal.keySet()) {
+    if(level.RandomWildAnimal.get(i)==n){
+        if(i.equalsIgnoreCase("tiger")){
+            Tiger tiger =new Tiger();
+            allWilds.add(tiger);
+        }
+        if(i.equalsIgnoreCase("lion")){
+            Lion lion=new Lion();
+            allWilds.add(lion);
+        }
+        if(i.equalsIgnoreCase("bear")){
+            Bear bear=new Bear();
+            allWilds.add(bear);
+        }
+    }
+    }
+}
     public void BuyAnimal(String name) {
         int t = 1;
         for (int i = 0; i < Domestics.size(); i++) {
@@ -108,6 +126,11 @@ public class Manager {
                     bank.setCoin(bank.getCoin() - Defenders.get(i).getPrice());
                 }
             }
+        }
+        if(name.equalsIgnoreCase("lion")){
+            Lion lion=new Lion();
+            lion.setX_position(1);
+            allWilds.add(lion);
         }
         if (t == 1) {
             if (name.equalsIgnoreCase("hen")) {
@@ -599,6 +622,7 @@ public class Manager {
                 if (Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()] > 0) {
                     Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()]--;
                     allDomestics.get(i).setCurrentTime(10);
+                    System.out.println(00000000);
                 }
             }
         }
@@ -610,6 +634,7 @@ public class Manager {
                         if (s) {
                             products.remove(j);
                             j--;
+                            System.out.println(00000000);
                         }
                     }
                 }
@@ -623,6 +648,7 @@ public class Manager {
                         if (allDefenders.get(i).getX_position() == allWilds.get(j).getX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getY_position()) {
                             allWilds.remove(j);
                             j--;
+                            System.out.println(00000000);
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
                         } else if (allWilds.get(j).getX_position() > allWilds.get(j).getPX_position()) {
@@ -659,6 +685,7 @@ public class Manager {
                         if (allDefenders.get(i).getX_position() == allWilds.get(j).getX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getY_position()) {
                             allWilds.remove(j);
                             j--;
+                            System.out.println(00000000);
                             //remove the wild and adding dog to the sagzapas th remove them in the end of the loop because one dog can kill more than one wildanimals
                             sagzapas.add(allDefenders.get(i));
                         } else if (allDefenders.get(i).getX_position() == allWilds.get(j).getPX_position() && allDefenders.get(i).getY_position() == allWilds.get(j).getPY_position()) {
@@ -766,7 +793,9 @@ public class Manager {
             }
         }
         for(int i=0;i<allWilds.size();i++){
-            Grass[allWilds.get(i).getY_position()][allWilds.get(i).getX_position()]=0;
+           if(allWilds.get(i).getY_position()<6&&allWilds.get(i).getX_position()<6){
+               Grass[allWilds.get(i).getY_position()][allWilds.get(i).getX_position()]=0;
+           }
         }
         for(int i=0;i<allWilds.size();i++){
             for(int j=0;j<allDefenders.size();j++){
@@ -850,7 +879,8 @@ public class Manager {
             //TODO
             //Tabe barkhrd vahshi ba mahsool va ahli  vahsi ba sag  , gorbe ba mahsool
             //TODO
-
+            AddWildAnimal(turn);
+turn++;
         }
         for (int i = 0; i < Logger.size(); i++) {
             System.out.println(Logger.get(i));
