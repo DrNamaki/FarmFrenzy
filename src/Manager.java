@@ -184,6 +184,7 @@ public void AddWildAnimal( int n){
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).getName().equalsIgnoreCase(name)) {
                 if (labratories.get(i).IsBuyed) {
+                    System.out.println("mygod");
                     String primaryProduct = "";
                     if (name.equalsIgnoreCase("FlourFactory"))
                         primaryProduct = "Egg";
@@ -252,6 +253,7 @@ public void AddWildAnimal( int n){
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).getName().equalsIgnoreCase(name)) {
                 if (bank.getCoin() >= labratories.get(i).getPrice()) {
+                    System.out.println("workshop");
                     labratories.get(i).IsBuyed = true;
                     bank.setCoin(bank.getCoin() - labratories.get(i).getPrice());
                     LocalDateTime w = LocalDateTime.now();
@@ -339,25 +341,26 @@ public void AddWildAnimal( int n){
     public void ProductProcessing() {
         for (int i = 0; i < labratories.size(); i++) {
             if (labratories.get(i).isActive()) {
+                System.out.println("mu gosh");
                 labratories.get(i).setCurrentTime(labratories.get(i).getCurrentTime() - 1);
                 if (labratories.get(i).getCurrentTime() == 0) {
                     labratories.get(i).setActive(false);
-                    if (labratories.get(i) instanceof FlourFactory && wareHouse.getAllCapacity() < 31 - Egg.SizeInWareHouse) {
+                    if (labratories.get(i) instanceof FlourFactory) {
                         products.add(new Flour(Flour.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
-                    } else if (labratories.get(i) instanceof WeavingFactory && wareHouse.getAllCapacity() < 31 - Cloth.SizeInWareHouse) {
+                    } else if (labratories.get(i) instanceof WeavingFactory ) {
                         products.add(new Cloth(Cloth.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
-                    } else if (labratories.get(i) instanceof MilkPackagingFactory && wareHouse.getAllCapacity() < 31 - PackagedMilk.SizeInWareHouse) {
+                    } else if (labratories.get(i) instanceof MilkPackagingFactory ) {
                         products.add(new PackagedMilk(PackagedMilk.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
-                    } else if (labratories.get(i) instanceof Bakery && wareHouse.getAllCapacity() < 31 - Bread.SizeInWareHouse) {
+                    } else if (labratories.get(i) instanceof Bakery ) {
                         products.add(new Bread(Bread.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
-                    } else if (labratories.get(i) instanceof Tailoring && wareHouse.getAllCapacity() < 31 - Shirt.SizeInWareHouse) {
+                    } else if (labratories.get(i) instanceof Tailoring ) {
                         products.add(new Shirt(Shirt.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
-                    } else if (labratories.get(i) instanceof IceCreamShop && wareHouse.getAllCapacity() < 31 - IceCream.SizeInWareHouse) {
+                    } else if (labratories.get(i) instanceof IceCreamShop ) {
                         products.add(new IceCream(IceCream.timeOfCorrupting, labratories.get(i).getX_Position(),
                                 labratories.get(i).getY_Position(), false));
                     } else System.out.println("We have not enough storage in ware house");
@@ -638,7 +641,7 @@ public void AddWildAnimal( int n){
                 if (Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()] > 0) {
                     Grass[allDomestics.get(i).getX_position()][allDomestics.get(i).getY_position()]--;
                     allDomestics.get(i).setCurrentTime(10);
-                    System.out.println(00000000);
+                 //   System.out.println(00000000);
                 }
             }
         }

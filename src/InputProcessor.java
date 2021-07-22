@@ -52,6 +52,7 @@ public class InputProcessor {
                     if (add.length == 2 && add[0].equalsIgnoreCase("START") && add[1].matches("^[0-9]+$")) {
                         //TODO
                         //file
+                        System.out.println("hello");
                         while (!getCommand.equalsIgnoreCase("EXIT")) {
                             getCommand = scanner.nextLine();
                             add = getCommand.split("\\s+");

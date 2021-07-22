@@ -2,8 +2,8 @@ import java.util.ArrayList;
 public class WareHouse {
     int Level;
     static final int Capacity = 30;
-    int AllCapacity;
-    int AvailableCapacity;
+    int AllCapacity=300;
+    int AvailableCapacity=300;
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Animal> animals = new ArrayList<>();
     ArrayList<Product> RecentlySold = new ArrayList<>();

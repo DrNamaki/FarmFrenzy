@@ -1,5 +1,5 @@
 public class TransformVehicle {
-    int AvailableCapacity=0;
+    int AvailableCapacity=15;
     int Capacity=15;
 int money;
 
